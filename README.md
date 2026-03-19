@@ -112,7 +112,7 @@ docker images
 docker run --rm hello-world
 ```
 
-![docker run hello-world](./screenshots/Docker_run_--rm_Hello-World.png)
+![docker run hello-world](./screenshots/Docker_run_--rm_Hello-World.jpg)
 
 > Lance le conteneur hello-world. L'option --rm supprime automatiquement le conteneur après son exécution.
 >
@@ -457,7 +457,7 @@ docker images
 docker run -itd -p 4545:8080 jordangrindrod/mario
 ```
 
-![docker run -itd -p 4545:8080 jordangrindrod/mario](./screenshots/11.infinite_Mario_Start.png)
+![docker run -itd -p 4545:8080 jordangrindrod/mario](./screenshots/11-infinite_Mario_Start.jpg)
 
 **Explications des options :**
 - `-i` : mode interactif (interactive mode)
@@ -466,7 +466,7 @@ docker run -itd -p 4545:8080 jordangrindrod/mario
 - `-p 4545:8080` : mappe le port 4545 de l'hôte au port 8080 du conteneur
 
 > **Résultat :** Le conteneur démarre en arrière-plan et Mario est accessible à `http://localhost:4545`
-![Mario Game Running](./screenshots/11.infinite_Mario_Start.png)
+![Mario Game Running](./screenshots/11-infinite_Mario_Start.jpg)
 
 
 
@@ -493,7 +493,7 @@ Ouvrez un navigateur et allez à :
 http://localhost:4545
 ```
 
-![Mario Game Running](./screenshots/infinite_Mario_Start.png)
+![Mario Game Running](./screenshots/11-infinite_Mario_Start.jpg)
 
 > Le jeu Mario est maintenant accessible et jouable dans le navigateur !
 
@@ -664,22 +664,23 @@ Ouvrez votre navigateur web et accédez à :
 http://localhost:8601
 ```
 
-![Super Mario à localhost:8601](./screenshots/20-mario-8601-game.png)
+![Super Mario à localhost:8601](./screenshots/20-Mario-8601-Game.jpg)
 
 > Le jeu Super Mario démarre et est jouable !
 
+![Mario Gameplay](./screenshots/22-mario-gameplay.jpg)
 **Instance 2 :**
 ```
 http://localhost:8600
 ```
 
-![Super Mario à localhost:8600](./screenshots/21-mario-8600-game.png)
+![Super Mario à localhost:8600](./screenshots/21-Mario-8600-Game.jpg)
 
 > Les 2 instances fonctionnent indépendamment. Vous pouvez jouer sur les deux en parallèle.
 
 **Vue des conteneurs actifs :**
 
-![Conteneurs 8600 et 8601 actifs](./screenshots/17.5-mario-8600-and-8601-running.png)
+![Conteneurs 8600 et 8601 actifs](./screenshots/17.5-mario-8600-and-8601-running.jpg)
 
 > Les 2 conteneurs tournent simultanément. Vous pouvez vérifier avec `docker ps`.
 
@@ -778,7 +779,7 @@ docker rmi pengbai/supermario
 
 #### **3. Naviguer vers l'onglet CONTAINERS**
 
-![Docker Desktop - Containers tab](./screenshots/19-desktop-containers-running.png)
+![Docker Desktop - Containers tab](./screenshots/19-desktop-containers-running.jpg)
 
 > **Informations affichées :**
 > - Conteneurs en cours d'exécution
@@ -829,7 +830,7 @@ ou
 
 Cliquez directement sur le **bouton "Open in browser"** (icône globe 🌐).
 
-![Super Mario dans le navigateur](./screenshots/20-mario-8601-game.png)
+![Super Mario dans le navigateur](./screenshots/20-Super-Mario-8601-Game.jpg)
 
 > Le jeu est accessible et jouable immédiatement.
 
