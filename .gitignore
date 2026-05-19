@@ -1,3 +1,4 @@
 # Dossiers/Fichiers documentation utilisateur
 .help
 node_modules
+.vscode/settings.json
