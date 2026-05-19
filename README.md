@@ -19,7 +19,7 @@ docker --version
 # ou docker -v
 ```
 
-![docker version](./screenshots/1-Docker-v.png)
+![docker version](./screenshots/1-Docker-V.png)
 
 > version **29.2.1** => **docker** est bien installé
 
@@ -29,7 +29,7 @@ docker --version
 docker info
 ```
 
-![docker info](./screenshots/2-Docker-info.png)
+![docker info](./screenshots/2-Docker-Info.png)
 
 > **info** permet d'afficher toutes les infos du système Docker (Conteneurs, Images, etc.)
 
@@ -43,7 +43,7 @@ docker info
 docker ps
 ```
 
-![docker ps](./screenshots/3-Docker-ps.png)
+![docker ps](./screenshots/3-Docker-Ps.png)
 
 > Affiche les conteneurs actuellement actifs. Aucun au départ.
 
@@ -53,7 +53,7 @@ docker ps
 docker images
 ```
 
-![docker images](./screenshots/4-docker-images.png)
+![docker images](./screenshots/4-Docker-Images.png)
 
 > Montre les images Docker présentes sur la machine.
 
@@ -68,13 +68,14 @@ docker run -it --rm -p 8088:80 docker/welcome-to-docker
 > Lance un conteneur en mode interactif (-it), expose le port 8088 de la machine vers le port 80 du conteneur, et supprime le conteneur automatiquement à l'arrêt (--rm).
 >
 > **Résultat :** Accès à http://localhost:8088 dans un navigateur
-> ***Notes :***
->- Le conteneur doit être arrêté manuellement (CTRL+C) pour revenir au terminal.
->-  Pour faire tourner le conteneur en arrière-plan, utiliser `-d` (détaché) et entrer `docker stop <id>` pour l'arrêter ensuite:
-> `docker run -d -p 8088:80 docker/welcome-to-docker`
-> puis
->  `docker stop <id>` pour arrêter.
->- Les options `-it` et `-d` peuvent être combinées pour lancer en mode interactif et détaché (mais il faut alors gérer les logs pour voir la sortie du conteneur).
+> **_Notes :_**
+>
+> - Le conteneur doit être arrêté manuellement (CTRL+C) pour revenir au terminal.
+> - Pour faire tourner le conteneur en arrière-plan, utiliser `-d` (détaché) et entrer `docker stop <id>` pour l'arrêter ensuite:
+>   `docker run -d -p 8088:80 docker/welcome-to-docker`
+>   puis
+>   `docker stop <id>` pour arrêter.
+> - Les options `-it` et `-d` peuvent être combinées pour lancer en mode interactif et détaché (mais il faut alors gérer les logs pour voir la sortie du conteneur).
 
 ### 6. Arrêter le conteneur
 
@@ -82,7 +83,7 @@ docker run -it --rm -p 8088:80 docker/welcome-to-docker
 docker stop <container_id|container_name>
 ```
 
-![docker stop](./screenshots/docker-stop.jpg)
+![docker stop](./screenshots/Docker-Stop.jpg)
 
 > Arrête "gracieusement" le conteneur (sans le supprimer).
 
@@ -92,7 +93,7 @@ docker stop <container_id|container_name>
 docker pull hello-world
 ```
 
-![docker pull hello-world](./screenshots/7-Docker-pull.png)
+![docker pull hello-world](./screenshots/7-Docker-Pull.png)
 
 > Télécharge l'image "hello-world" depuis Docker Hub vers la machine locale.
 
@@ -102,7 +103,7 @@ docker pull hello-world
 docker images
 ```
 
-![docker images after pull](./screenshots/8-Docker-images.png)
+![docker images after pull](./screenshots/8-Docker-Images.png)
 
 > Hello-world doit maintenant apparaître dans la liste des images locales.
 
@@ -157,6 +158,7 @@ docker rm $(docker ps -a -q)
 ```
 
 > ⚠️ **Explication :**
+>
 > - `docker ps -a` : lister tous les conteneurs (actifs + arrêtés)
 > - `-q` : afficher uniquement les IDs (quiet mode)
 > - `$(...)` : substitution de commande (exécuter la commande imbriquée)
@@ -189,6 +191,7 @@ docker rm -f mon-conteneur
 ```
 
 > ⚠️ **ATTENTION** :
+>
 > - `-f` = force (force la suppression sans arrêter d'abord)
 > - Cette option peut causer une perte de données si le conteneur écrit encore
 > - ✅ Préférer arrêter d'abord avec `docker stop`
@@ -262,6 +265,7 @@ docker rmi mon-image:latest
 ```
 
 > ⚠️ **ATTENTION** :
+>
 > - `-f` = force (supprime même si utilisée)
 > - ✅ Meilleure pratique : supprimer les conteneurs d'abord, puis les images
 
@@ -294,17 +298,17 @@ docker images
 
 #### **D. Questions pédagogiques du PDF - Synthèse**
 
-| Question | Commande | Notes |
-|----------|----------|-------|
-| **Supprimer 1 conteneur** | `docker rm <id>` | Doit être arrêté |
-| **Supprimer N conteneurs** | `docker rm id1 id2 id3` | Énumérer les IDs |
-| **Tous les arrêtés** | `docker container prune` | ✅ Sûr et recommandé |
-| **Forcer suppression active** | `docker rm -f <id>` | ⚠️ Risqué, préférer `docker stop` |
-| **Supprimer 1 image** | `docker rmi <image>` | Non utilisée requise |
-| **Supprimer N images** | `docker rmi img1 img2` | Énumérer les images |
-| **Toutes non utilisées** | `docker image prune` | ✅ Sûr et recommandé |
-| **Toutes orphelines** | `docker image prune -a` | ⚠️ Plus agressif |
-| **Forcer suppression image** | `docker rmi -f <image>` | ⚠️ Risqué |
+| Question                      | Commande                 | Notes                             |
+| ----------------------------- | ------------------------ | --------------------------------- |
+| **Supprimer 1 conteneur**     | `docker rm <id>`         | Doit être arrêté                  |
+| **Supprimer N conteneurs**    | `docker rm id1 id2 id3`  | Énumérer les IDs                  |
+| **Tous les arrêtés**          | `docker container prune` | ✅ Sûr et recommandé              |
+| **Forcer suppression active** | `docker rm -f <id>`      | ⚠️ Risqué, préférer `docker stop` |
+| **Supprimer 1 image**         | `docker rmi <image>`     | Non utilisée requise              |
+| **Supprimer N images**        | `docker rmi img1 img2`   | Énumérer les images               |
+| **Toutes non utilisées**      | `docker image prune`     | ✅ Sûr et recommandé              |
+| **Toutes orphelines**         | `docker image prune -a`  | ⚠️ Plus agressif                  |
+| **Forcer suppression image**  | `docker rmi -f <image>`  | ⚠️ Risqué                         |
 
 ---
 
@@ -431,11 +435,11 @@ docker rmi -f docker/welcome-to-docker
 docker search mario
 ```
 
-> *Cette commande affiche toutes les images Docker disponibles dont le nom contient la chaîne de caractères "mario".* 
+> _Cette commande affiche toutes les images Docker disponibles dont le nom contient la chaîne de caractères "mario"._
 
 L'image que nous cherchons est la suivante: `jordangrindrod/mario`.
 
-![docker search mario](./screenshots/10-Docker_search_mario.png)
+![docker search mario](./screenshots/10-Docker_Search_Mario.png)
 
 ### 2. Télécharger l'image Mario
 
@@ -459,16 +463,17 @@ docker images
 docker run -itd -p 4545:8080 jordangrindrod/mario
 ```
 
-![docker run -itd -p 4545:8080 jordangrindrod/mario](./screenshots/11-infinite_Mario_Start.jpg)
+![docker run -itd -p 4545:8080 jordangrindrod/mario](./screenshots/11-Infinite_Mario_Start.jpg)
 
 **Explications des options :**
+
 - `-i` : mode interactif (interactive mode)
 - `-t` : terminal
 - `-d` : mode détaché (detach mode) - exécute le conteneur en arrière-plan
 - `-p 4545:8080` : mappe le port 4545 de l'hôte au port 8080 du conteneur
 
 > **Résultat :** Le conteneur démarre en arrière-plan et Mario est accessible à `http://localhost:4545`
-![Mario Game Running](./screenshots/11-infinite_Mario_Start.jpg)
+> ![Mario Game Running](./screenshots/11-Infinite_Mario_Start.jpg)
 
 ### 5. Vérifier que le conteneur est en cours d'exécution
 
@@ -486,7 +491,8 @@ docker inspect <container_id>
 
 ### 7. Accéder au jeu Mario
 
-*Ouvrez un navigateur et allez à :*
+_Ouvrez un navigateur et allez à :_
+
 ```
 http://localhost:4545
 ```
@@ -515,18 +521,19 @@ docker rm <container_id>
 
 ## ✅ Job 02 - Résumé
 
-| Étape | Commande | Résultat |
-|-------|----------|----------|
-| Rechercher Mario | `docker search mario` | Images trouvées ✅ |
-| Télécharger | `docker pull jordangrindrod/mario` | Image récupérée ✅ |
-| Vérifier images | `docker images` | Mario présent ✅ |
-| Lancer conteneur | `docker run -itd -p 4545:8080 jordangrindrod/mario` | Conteneur démarré ✅ |
-| Vérifier état | `docker ps` | Conteneur actif ✅ |
-| Accéder au jeu | `http://localhost:4545` | Mario jouable ✅ |
-| Arrêter | `docker stop <id>` | Conteneur stoppé ✅ |
-| Supprimer | `docker rm <id>` | Conteneur supprimé ✅ |
+| Étape            | Commande                                            | Résultat              |
+| ---------------- | --------------------------------------------------- | --------------------- |
+| Rechercher Mario | `docker search mario`                               | Images trouvées ✅    |
+| Télécharger      | `docker pull jordangrindrod/mario`                  | Image récupérée ✅    |
+| Vérifier images  | `docker images`                                     | Mario présent ✅      |
+| Lancer conteneur | `docker run -itd -p 4545:8080 jordangrindrod/mario` | Conteneur démarré ✅  |
+| Vérifier état    | `docker ps`                                         | Conteneur actif ✅    |
+| Accéder au jeu   | `http://localhost:4545`                             | Mario jouable ✅      |
+| Arrêter          | `docker stop <id>`                                  | Conteneur stoppé ✅   |
+| Supprimer        | `docker rm <id>`                                    | Conteneur supprimé ✅ |
 
 **Concepts clés :**
+
 - Port mapping : `-p hostPort:containerPort`
 - Mode interactif + terminal + détaché : `-itd`
 - Docker Hub et les images publiques
@@ -552,7 +559,7 @@ docker rm <container_id>
 docker search pengbai/supermario
 ```
 
-![docker search supermario](./screenshots/12-search-supermario.png)
+![docker search supermario](./screenshots/12-Search-Supermario.png)
 
 > Cette commande affiche toutes les images disponibles contenant "pengbai/supermario" dans Docker Hub. On cherche l'image officielle `pengbai/supermario`.
 >
@@ -566,7 +573,7 @@ docker search pengbai/supermario
 docker pull pengbai/supermario
 ```
 
-![docker pull supermario](./screenshots/13-pull-supermario.png)
+![docker pull supermario](./screenshots/13-Pull-Supermario.png)
 
 > Télécharge l'image `pengbai/supermario` depuis Docker Hub vers la machine locale.
 >
@@ -582,11 +589,12 @@ docker pull pengbai/supermario
 docker images
 ```
 
-![docker images supermario](./screenshots/14-images-supermario.png)
+![docker images supermario](./screenshots/14-Images-Supermario.png)
 
 > Affiche la liste complète des images locales. L'image `pengbai/supermario` doit maintenant y apparaître.
 >
 > **Informations affichées :**
+>
 > - `REPOSITORY` : pengbai/supermario
 > - `TAG` : latest
 > - `IMAGE ID` : Identifiant unique de l'image
@@ -600,9 +608,10 @@ docker images
 docker run -itd -p 8600:8080 pengbai/supermario
 ```
 
-![docker run supermario 8600](./screenshots/15-run-supermario-8600.png)
+![docker run supermario 8600](./screenshots/15-Run-Supermario-8600.png)
 
 > **Options expliquées :**
+>
 > - `-i` : mode interactif (allows stdin/input)
 > - `-t` : alloue un pseudo-terminal (tty)
 > - `-d` : mode détaché (daemon) - exécute en arrière-plan
@@ -620,7 +629,7 @@ docker run -itd -p 8600:8080 pengbai/supermario
 docker run -itd -p 8601:8080 pengbai/supermario
 ```
 
-![docker run supermario 8601](./screenshots/16-run-supermario-8601.png)
+![docker run supermario 8601](./screenshots/16-Run-Supermario-8601.png)
 
 > Lance une **deuxième instance** du jeu Mario sur un port différent (8601).
 >
@@ -638,11 +647,12 @@ docker run -itd -p 8601:8080 pengbai/supermario
 docker ps
 ```
 
-![docker ps deux conteneurs](./screenshots/17-ps-two-containers.png)
+![docker ps deux conteneurs](./screenshots/17-Ps-Two-Containers.png)
 
 > Affiche les conteneurs actuellement actifs.
 >
 > **Résultat attendu :** 2 lignes, chacune avec :
+>
 > - `CONTAINER ID` : ID unique du conteneur
 > - `IMAGE` : pengbai/supermario
 > - `COMMAND` : Commande de démarrage
@@ -680,7 +690,7 @@ http://localhost:8600
 
 **Vue des conteneurs actifs :**
 
-![Conteneurs 8600 et 8601 actifs](./screenshots/17.5-mario-8600-and-8601-running.jpg)
+![Conteneurs 8600 et 8601 actifs](./screenshots/17.5-Mario-8600-And-8601-Running.jpg)
 
 > Les 2 conteneurs tournent simultanément (ports 8600 et 8601). Vous pouvez vérifier avec `docker ps`.
 
@@ -694,7 +704,7 @@ http://localhost:8600
 docker stop <container_id_1>
 ```
 
-![docker stop container](./screenshots/23-stop-container.png)
+![docker stop container](./screenshots/23-Stop-Container.png)
 
 > Arrête gracieusement le conteneur (donne 10 secondes pour arrêter proprement).
 >
@@ -703,6 +713,7 @@ docker stop <container_id_1>
 > **Note :** L'utilisateur doit remplacer `<container_id_1>` par l'ID réel (ex: `a1b2c3d4e5f6`).
 
 **Arrêter le 2e conteneur :**
+
 ```bash
 docker stop <container_id_2>
 ```
@@ -710,6 +721,7 @@ docker stop <container_id_2>
 > Arrête le 2e conteneur .
 >
 > **Alternative (arrêter tous les conteneurs) :**
+>
 > ```bash
 > docker stop $(docker ps -q)
 > ```
@@ -722,7 +734,7 @@ docker stop <container_id_2>
 docker rm <container_id_1> <container_id_2>
 ```
 
-![docker rm by ID](./screenshots/25-rm-container-by-id.png)
+![docker rm by ID](./screenshots/25-Rm-Container-By-Id.png)
 
 > Supprime les 2 conteneurs. Les IDs doivent être séparés par des espaces.
 >
@@ -736,7 +748,7 @@ docker rm <container_id_1> <container_id_2>
 docker rmi pengbai/supermario
 ```
 
-![docker rmi supermario](./screenshots/26-rmi-image.png)
+![docker rmi supermario](./screenshots/26-Rmi-Image.png)
 
 > Supprime l'image `pengbai/supermario` du système local.
 >
@@ -761,7 +773,7 @@ docker rmi pengbai/supermario
 
 > Docker Desktop doit être en cours d'exécution. Cherchez l'icône Docker dans la barre système (Windows : en bas à droite) ou lancez l'application.
 
-![Docker Desktop - Images](./screenshots/18-desktop-images.png)
+![Docker Desktop - Images](./screenshots/18-Desktop-Images.png)
 
 > Vue de l'onglet **Images**. L'image `pengbai/supermario` y apparaît.
 
@@ -769,9 +781,10 @@ docker rmi pengbai/supermario
 
 #### **2. Naviguer vers l'onglet IMAGES**
 
-![Docker Desktop - Images tab](./screenshots/18-desktop-images.png)
+![Docker Desktop - Images tab](./screenshots/18-Desktop-Images.png)
 
 > **Actions possibles :**
+>
 > - ✅ Voir toutes les images téléchargées
 > - 🔍 Rechercher une image
 > - ▶️ Lancer un conteneur depuis une image (bouton "RUN")
@@ -781,9 +794,10 @@ docker rmi pengbai/supermario
 
 #### **3. Naviguer vers l'onglet CONTAINERS**
 
-![Docker Desktop - Containers tab](./screenshots/19-desktop-containers-running.jpg)
+![Docker Desktop - Containers tab](./screenshots/19-Desktop-Containers-Running.png)
 
 > **Informations affichées :**
+>
 > - Conteneurs en cours d'exécution
 > - Statut (Running, Stopped, Exited)
 > - Ports mappés (8600:8080, 8601:8080, etc.)
@@ -791,13 +805,13 @@ docker rmi pengbai/supermario
 
 **Avec 2 conteneurs en cours :**
 
-![Docker Desktop - 2 conteneurs](./screenshots/17.1-desktop_2-containers.png)
+![Docker Desktop - 2 conteneurs](./screenshots/17-1-Desktop_2-Containers.png)
 
 > Les 2 instances de Super Mario sont visibles côte à côte.
 
 **Avec 3 conteneurs (variante) :**
 
-![Docker Desktop - 3 conteneurs](./screenshots/17.2-desktop_3-containers.png)
+![Docker Desktop - 3 conteneurs](./screenshots/17-2-Desktop_3-Containers.png)
 
 > Exemple avec 3 instances simultanées.
 
@@ -814,7 +828,7 @@ docker rmi pengbai/supermario
    - **Ports** : Entrez `8600:8080` (ou `8601:8080` pour la 2e instance)
    - **Cliquez "RUN"**
 
-![Docker Desktop avec 2 conteneurs lancés](./screenshots/16.5-run-supermario-8601-desktop.png)
+![Docker Desktop avec 2 conteneurs lancés](./screenshots/16-5-Run-Supermario-8601-Desktop.png)
 
 > Les conteneurs apparaissent immédiatement dans l'onglet **Containers**.
 
@@ -832,7 +846,7 @@ ou
 
 Cliquez directement sur le **bouton "Open in browser"** (icône globe 🌐).
 
-![Super Mario dans le navigateur](./screenshots/20-Super-Mario-8601-Game.jpg)
+![Super Mario dans le navigateur](./screenshots/20-Mario-8601-Game.jpg)
 
 > Le jeu est accessible et jouable immédiatement.
 
@@ -845,13 +859,13 @@ Cliquez directement sur le **bouton "Open in browser"** (icône globe 🌐).
 1. Localisez le conteneur
 2. Cliquez sur le bouton **"STOP"** (icône ⏸️ ou carré rouge)
 
-![Docker Desktop - Conteneur arrêté](./screenshots/24-desktop-stopped.png)
+![Docker Desktop - Conteneur arrêté](./screenshots/24-Desktop-Stopped.png)
 
 > Le statut devient **"Exited"** (arrêté).
 
 Variante :
 
-![Docker Desktop - Variante arrêt](./screenshots/24.1-desktop-stopped.png)
+![Docker Desktop - Variante arrêt](./screenshots/24-1-Desktop-Stopped.png)
 
 > L'interface peut afficher légèrement différemment, mais le fonctionnement est identique.
 
@@ -877,7 +891,7 @@ Variante :
 2. Cliquez sur le bouton **"DELETE"** (icône 🗑️)
 3. Confirmez
 
-![Docker Desktop - Image supprimée](./screenshots/27-desktop-image-deleted.png)
+![Docker Desktop - Image supprimée](./screenshots/27-Desktop-Image-Deleted.png)
 
 > L'image `pengbai/supermario` disparaît de la liste des images.
 
@@ -905,16 +919,16 @@ L'onglet **Dashboard** montre les événements en temps réel (démarrages, arr�
 
 ### Résumé Job 02 - Comparaison des 2 Méthodes
 
-| Action | Terminal (CLI) | Docker Desktop (GUI) |
-|--------|---|---|
-| **Rechercher image** | `docker search pengbai/supermario` | Onglet "Images" → Recherche |
-| **Télécharger** | `docker pull pengbai/supermario` | Automatique lors du "RUN" |
-| **Lancer conteneur** | `docker run -itd -p 8600:8080 ...` | Onglet "Images" → "RUN" + formulaire |
-| **Vérifier état** | `docker ps` | Onglet "Containers" (temps réel) |
-| **Accéder au jeu** | Ouvrir http://localhost:8600 | Clic sur port ou "Open in browser" |
-| **Arrêter** | `docker stop <id>` | Clic "STOP" |
-| **Supprimer conteneur** | `docker rm <id>` | Clic "DELETE" |
-| **Supprimer image** | `docker rmi pengbai/supermario` | Onglet "Images" → "DELETE" |
+| Action                  | Terminal (CLI)                     | Docker Desktop (GUI)                 |
+| ----------------------- | ---------------------------------- | ------------------------------------ |
+| **Rechercher image**    | `docker search pengbai/supermario` | Onglet "Images" → Recherche          |
+| **Télécharger**         | `docker pull pengbai/supermario`   | Automatique lors du "RUN"            |
+| **Lancer conteneur**    | `docker run -itd -p 8600:8080 ...` | Onglet "Images" → "RUN" + formulaire |
+| **Vérifier état**       | `docker ps`                        | Onglet "Containers" (temps réel)     |
+| **Accéder au jeu**      | Ouvrir http://localhost:8600       | Clic sur port ou "Open in browser"   |
+| **Arrêter**             | `docker stop <id>`                 | Clic "STOP"                          |
+| **Supprimer conteneur** | `docker rm <id>`                   | Clic "DELETE"                        |
+| **Supprimer image**     | `docker rmi pengbai/supermario`    | Onglet "Images" → "DELETE"           |
 
 ---
 
@@ -931,25 +945,25 @@ L'onglet **Dashboard** montre les événements en temps réel (démarrages, arr�
 
 ### ✅ Job 02 (alt.) - Résumé Tableau
 
-| Étape | Commande / Action | Capture | Résultat |
-|-------|------------------|---------|----------|
-| **Rechercher (Terminal)** | `docker search pengbai/supermario` | 12 | Images trouvées ✅ |
-| **Télécharger** | `docker pull pengbai/supermario` | 13 | Image récupérée ✅ |
-| **Vérifier image** | `docker images` | 14 | penbaï/supermario présent ✅ |
-| **Lancer 1er conteneur** | `docker run -itd -p 8600:8080 ...` | 15 | Port 8600 ✅ |
-| **Lancer 2e conteneur** | `docker run -itd -p 8601:8080 ...` | 16 | Port 8601 ✅ |
-| **Vérifier (Terminal)** | `docker ps` | 17 | 2 conteneurs ✅ |
-| **Vérifier (Desktop)** | Onglet Containers | 17.1 / 17.2 | 2-3 conteneurs visibles ✅ |
-| **Accéder au jeu (8600)** | http://localhost:8600 | 20 | Mario jouable ✅ |
-| **Accéder au jeu (8601)** | http://localhost:8601 | 21 | Mario jouable ✅ |
-| **Images (Desktop)** | Onglet Images | 18 | pengbai/supermario visible ✅ |
-| **Arrêter (Terminal)** | `docker stop <id>` | 23 | Conteneur arrêté ✅ |
-| **Arrêter (Desktop)** | Clic "STOP" | 24 / 24.1 | Conteneur arrêté ✅ |
-| **Supprimer par ID** | `docker rm <container_id>` | 25 | Conteneur supprimé ✅ |
-| **Supprimer par nom** | `docker rm <container_name>` | 25.5 | Conteneur supprimé ✅ |
-| **Vérifier suppression** | `docker ps -a` | 25.6 | Aucun conteneur ✅ |
-| **Supprimer image** | `docker rmi pengbai/supermario` | 26 | Image supprimée ✅ |
-| **Image supprimée (Desktop)** | Onglet Images | 27 | pengbai/supermario absent ✅ |
+| Étape                         | Commande / Action                  | Capture     | Résultat                      |
+| ----------------------------- | ---------------------------------- | ----------- | ----------------------------- |
+| **Rechercher (Terminal)**     | `docker search pengbai/supermario` | 12          | Images trouvées ✅            |
+| **Télécharger**               | `docker pull pengbai/supermario`   | 13          | Image récupérée ✅            |
+| **Vérifier image**            | `docker images`                    | 14          | penbaï/supermario présent ✅  |
+| **Lancer 1er conteneur**      | `docker run -itd -p 8600:8080 ...` | 15          | Port 8600 ✅                  |
+| **Lancer 2e conteneur**       | `docker run -itd -p 8601:8080 ...` | 16          | Port 8601 ✅                  |
+| **Vérifier (Terminal)**       | `docker ps`                        | 17          | 2 conteneurs ✅               |
+| **Vérifier (Desktop)**        | Onglet Containers                  | 17.1 / 17.2 | 2-3 conteneurs visibles ✅    |
+| **Accéder au jeu (8600)**     | http://localhost:8600              | 20          | Mario jouable ✅              |
+| **Accéder au jeu (8601)**     | http://localhost:8601              | 21          | Mario jouable ✅              |
+| **Images (Desktop)**          | Onglet Images                      | 18          | pengbai/supermario visible ✅ |
+| **Arrêter (Terminal)**        | `docker stop <id>`                 | 23          | Conteneur arrêté ✅           |
+| **Arrêter (Desktop)**         | Clic "STOP"                        | 24 / 24.1   | Conteneur arrêté ✅           |
+| **Supprimer par ID**          | `docker rm <container_id>`         | 25          | Conteneur supprimé ✅         |
+| **Supprimer par nom**         | `docker rm <container_name>`       | 25.5        | Conteneur supprimé ✅         |
+| **Vérifier suppression**      | `docker ps -a`                     | 25.6        | Aucun conteneur ✅            |
+| **Supprimer image**           | `docker rmi pengbai/supermario`    | 26          | Image supprimée ✅            |
+| **Image supprimée (Desktop)** | Onglet Images                      | 27          | pengbai/supermario absent ✅  |
 
 ---
 
@@ -967,13 +981,15 @@ L'onglet **Dashboard** montre les événements en temps réel (démarrages, arr�
 ### 1. Lancer le serveur Nginx
 
 **Commande :**
+
 ```bash
 docker run -d -p 8080:80 nginx
 ```
 
-![docker run nginx 8080](./screenshots/28-docker-run-nginx-8080.png)
+![docker run nginx 8080](./screenshots/28-Docker-Run-Nginx-8080.png)
 
 > **Explication des options :**
+>
 > - `run` : crée et lance un new conteneur
 > - `-d` : mode détaché (daemon) - exécute en arrière-plan
 > - `-p 8080:80` : mappe le port 8080 de la machine au port 80 du conteneur Nginx
@@ -988,15 +1004,17 @@ docker run -d -p 8080:80 nginx
 ### 2. Vérifier que le conteneur est actif
 
 **Commande :**
+
 ```bash
 docker ps
 ```
 
-![docker ps nginx running](./screenshots/29-docker-ps-nginx-running.png)
+![docker ps nginx running](./screenshots/29-Docker-Ps-Nginx-Running.png)
 
 > Affiche la liste des conteneurs en cours d'exécution.
 >
 > **Colonnes importantes :**
+>
 > - `CONTAINER ID` : ID unique du conteneur (ex: `a1b2c3d4e5f6`)
 > - `IMAGE` : `nginx` (l'image lancée)
 > - `COMMAND` : `nginx -g daemon off;` (la commande exécutée à l'intérieur)
@@ -1012,6 +1030,7 @@ docker ps
 ### 3. Accéder à la page d'accueil Nginx via navigateur
 
 **Ouvre un navigateur web et va à :**
+
 ```
 http://127.0.0.1:8080
 ```
@@ -1022,7 +1041,7 @@ ou
 http://localhost:8080
 ```
 
-![nginx welcome page](./screenshots/30-nginx-welcome-page.png)
+![nginx welcome page](./screenshots/30-Nginx-Welcome-Page.png)
 
 > **Résultat attendu :** Une page HTML blanche affichant :
 >
@@ -1043,29 +1062,34 @@ http://localhost:8080
 Pour modifier le contenu serveur, tu dois accéder au **bash (terminal)** du conteneur.
 
 **Commande :**
+
 ```bash
 docker exec -ti <CONTAINER_ID> bash
 ```
 
 **Exemple concret :**
+
 ```bash
 docker exec -ti a1b2c3d4e5f6 bash
 ```
 
-*(Remplace `a1b2c3d4e5f6` par l'ID réel de ton conteneur)*
+_(Remplace `a1b2c3d4e5f6` par l'ID réel de ton conteneur)_
 
-![docker exec bash prompt](./screenshots/31-docker-exec-bash-prompt.png)
+![docker exec bash prompt](./screenshots/31-Docker-Exec-Bash-Prompt.png)
 
 > **Explication :**
+>
 > - `docker exec` : exécute une commande **à l'intérieur** d'un conteneur actif
 > - `-t` : alloue un pseudo-terminal (tty)
 > - `-i` : rend l'entrée interactive (stdin)
 > - `bash` : la commande à exécuter (le shell bash)
 >
 > **Résultat :** Le prompt change vers quelque chose comme :
+>
 > ```
 > root@a1b2c3d4e5f6:/#
 > ```
+>
 > Tu es maintenant **connecté à l'intérieur du conteneur**, comme si tu utilisais SSH sur une machine Linux distante. Chaque commande que tu tapes s'exécute **dans le conteneur**, pas sur ta machine.
 
 ---
@@ -1075,16 +1099,18 @@ docker exec -ti a1b2c3d4e5f6 bash
 Nginx stocke les fichiers web dans `/usr/share/nginx/html`.
 
 **Commande :**
+
 ```bash
 cd /usr/share/nginx/html
 ls -la
 ```
 
-*(À exécuter dans le bash du conteneur)*
+_(À exécuter dans le bash du conteneur)_
 
-![nginx html directory](./screenshots/32-nginx-html-directory.png)
+![nginx html directory](./screenshots/32-Nginx-Html-Directory.png)
 
 > **Résultat attendu :**
+>
 > ```
 > total 8
 > drwxr-xr-x 1 root root 4096 ...  .
@@ -1093,6 +1119,7 @@ ls -la
 > ```
 >
 > **Explication :**
+>
 > - `cd` : change le répertoire de travail
 > - `ls -la` : liste tous les fichiers avec permissions détaillées
 > - `.` = répertoire courant
@@ -1106,27 +1133,28 @@ ls -la
 ### 6. Afficher le contenu du fichier index.html
 
 **Commande :**
+
 ```bash
 cat index.html
 ```
 
-*(À exécuter dans le bash du conteneur)*
+_(À exécuter dans le bash du conteneur)_
 
-![nginx index.html content](./screenshots/33-nginx-index-html-content.png)
+![nginx index.html content](./screenshots/33-Nginx-Index-Html-Content.png)
 
 > **Résultat :** Le code HTML du fichier s'affiche dans le terminal.
 >
 > ```html
 > <!DOCTYPE html>
 > <html>
-> <head>
-> <title>Welcome to nginx!</title>
-> ...
-> </head>
-> <body>
-> <h1>Welcome to nginx!</h1>
-> ...
-> </body>
+>   <head>
+>     <title>Welcome to nginx!</title>
+>     ...
+>   </head>
+>   <body>
+>     <h1>Welcome to nginx!</h1>
+>     ...
+>   </body>
 > </html>
 > ```
 >
@@ -1141,15 +1169,17 @@ Il existe 2 méthodes pour modifier le fichier :
 #### **Méthode 1 : Modification rapide via commande bash**
 
 **Commande :**
+
 ```bash
 echo "<h1>Bonjour depuis le conteneur Nginx!</h1>" > index.html
 ```
 
-*(À exécuter dans le bash du conteneur)*
+_(À exécuter dans le bash du conteneur)_
 
-![nginx modify bash command](./screenshots/34-nginx-modify-index-bash.png)
+![nginx modify bash command](./screenshots/34-Nginx-Modify-Index-Bash.png)
 
 > **Explication :**
+>
 > - `echo` : affiche du texte
 > - `> index.html` : redirige la sortie dans le fichier (écrase le contenu)
 >
@@ -1162,20 +1192,23 @@ echo "<h1>Bonjour depuis le conteneur Nginx!</h1>" > index.html
 #### **Méthode 2 : Modification avec l'éditeur nano**
 
 **Premièrement, installer nano (s'il n'est pas présent) :**
+
 ```bash
 apt-get update && apt-get install -y nano
 ```
 
 **Puis ouvrir le fichier :**
+
 ```bash
 nano index.html
 ```
 
-*(À exécuter dans le bash du conteneur)*
+_(À exécuter dans le bash du conteneur)_
 
-![nginx modify with nano editor](./screenshots/34-nginx-modify-index-nano.png)
+![nginx modify with nano editor](./screenshots/34-Nginx-Modify-Index-Nano.png)
 
 > **Éditeur nano :**
+>
 > - Affiche le contenu du fichier
 > - Tu peux éditer ligne par ligne
 > - Les commandes sont affichées en bas :
@@ -1184,6 +1217,7 @@ nano index.html
 >   - `^W` = Ctrl+W : chercher
 >
 > **Instructions pour modifier :**
+>
 > 1. Navigue avec les flèches du clavier
 > 2. Sélectionne tout le texte (Ctrl+A ou via les flèches)
 > 3. Supprime (Delete ou Backspace)
@@ -1197,17 +1231,19 @@ nano index.html
 ### 8. Vérifier la modification dans le navigateur
 
 **Ouvre ton navigateur et rafraîchis la page :**
+
 ```
 http://localhost:8080
 ```
 
-*(Appuie sur F5 ou Ctrl+R pour rafraîchir)*
+_(Appuie sur F5 ou Ctrl+R pour rafraîchir)_
 
 #### **Résultat après Méthode 1 (bash) :**
 
-![nginx modified page bash](./screenshots/35-nginx-modified-page-bash.png)
+![nginx modified page bash](./screenshots/35-Nginx-Modified-Page-Bash.png)
 
 > Affiche simplement :
+>
 > ```
 > Bonjour depuis le conteneur Nginx!
 > ```
@@ -1216,7 +1252,7 @@ http://localhost:8080
 
 #### **Résultat après Méthode 2 (nano) :**
 
-![nginx modified page nano](./screenshots/35-nginx-modified-page-nano.png)
+![nginx modified page nano](./screenshots/35-Nginx-Modified-Page-Nano.png)
 
 > Si tu as modifié le contenu avec nano, le navigateur affichera le nouveau contenu.
 
@@ -1229,6 +1265,7 @@ http://localhost:8080
 ### 9. Quitter le bash du conteneur
 
 **Commande :**
+
 ```bash
 exit
 ```
@@ -1240,16 +1277,18 @@ exit
 ### 10. Arrêter le conteneur Nginx
 
 **Commande :**
+
 ```bash
 docker stop <CONTAINER_ID>
 ```
 
 **Exemple :**
+
 ```bash
 docker stop a1b2c3d4e5f6
 ```
 
-![docker stop nginx](./screenshots/36-docker-stop-nginx.png)
+![docker stop nginx](./screenshots/36-Docker-Stop-Nginx.png)
 
 > **Résultat :** L'ID du conteneur s'affiche, confirmant l'arrêt.
 >
@@ -1262,17 +1301,19 @@ docker stop a1b2c3d4e5f6
 ### 11. Vérifier que le conteneur est arrêté
 
 **Commande :**
+
 ```bash
 docker ps
 ```
 
-![docker ps nginx stopped](./screenshots/37-docker-ps-nginx-stopped.png)
+![docker ps nginx stopped](./screenshots/37-Docker-Ps-Nginx-Stopped.png)
 
 > **Résultat :** Le conteneur Nginx **n'apparaît pas** dans la liste.
 >
 > **Raison :** `docker ps` affiche uniquement les conteneurs **actifs**. Les conteneurs arrêtés ne sont pas listés.
 >
 > **Pour voir aussi les arrêtés :**
+>
 > ```bash
 > docker ps -a
 > ```
@@ -1282,24 +1323,28 @@ docker ps
 ### 12. Supprimer le conteneur
 
 **Commande :**
+
 ```bash
 docker rm <CONTAINER_ID>
 ```
 
 **Exemple :**
+
 ```bash
 docker rm a1b2c3d4e5f6
 ```
 
-![docker rm nginx](./screenshots/38-docker-rm-nginx.png)
+![docker rm nginx](./screenshots/38-Docker-Rm-Nginx.png)
 
 > **Résultat :** L'ID du conteneur s'affiche, confirmant la suppression.
 >
 > **Différence avec `docker stop` :**
+>
 > - `docker stop` : arrête le conteneur (peut le relancer)
 > - `docker rm` : supprime le conteneur définitivement
 >
 > **Note :** Tu dois arrêter le conteneur **avant** de le supprimer. Si tu essaies de supprimer un conteneur actif :
+>
 > ```bash
 > docker rm a1b2c3d4e5f6
 > # Error: You cannot remove a running container
@@ -1312,15 +1357,17 @@ docker rm a1b2c3d4e5f6
 ### 13. Vérifier l'absence complète du conteneur
 
 **Commande :**
+
 ```bash
 docker ps -a
 ```
 
-![docker ps all empty](./screenshots/39-docker-ps-all-empty.png)
+![docker ps all empty](./screenshots/39-Docker-Ps-All-Empty.png)
 
 > **Résultat :** Pas de trace du conteneur Nginx.
 >
 > **Explication :**
+>
 > - `docker ps` : affiche seulement les actifs
 > - `docker ps -a` : affiche tous (actifs + arrêtés + supprimés)
 >
@@ -1333,13 +1380,15 @@ docker ps -a
 Docker accumule des ressources inutiles au fil du temps (images, conteneurs, volumes orphelins, etc.).
 
 **Commande de nettoyage complet :**
+
 ```bash
 docker system prune
 ```
 
-![docker system prune](./screenshots/40-docker-system-prune.png)
+![docker system prune](./screenshots/40-Docker-System-Prune.png)
 
 > **Résultat attendu :**
+>
 > ```
 > WARNING! This will remove:
 >   - all stopped containers
@@ -1351,6 +1400,7 @@ docker system prune
 > ```
 >
 > **Explication :**
+>
 > - Supprime les conteneurs arrêtés inutilisés
 > - Supprime les images orphelines (non utilisées)
 > - Libère de l'espace disque
@@ -1361,24 +1411,24 @@ docker system prune
 
 ### Résumé Job 03 - Tableau complet
 
-| Étape | Commande | Résultat | Screenshot |
-|-------|----------|----------|-----------|
-| 1 | `docker run -d -p 8080:80 nginx` | Conteneur lancé | 28 |
-| 2 | `docker ps` | Nginx actif | 29 |
-| 3 | Navigateur http://localhost:8080 | Page par défaut | 30 |
-| 4 | `docker exec -ti <ID> bash` | Bash prompt | 31 |
-| 5 | `cd /usr/share/nginx/html && ls` | Fichiers visibles | 32 |
-| 6 | `cat index.html` | HTML affiché | 33 |
-| 7a | `echo "..." > index.html` (bash) | Fichier modifié (bash) | 34-bash |
-| 7b | `nano index.html` (nano) | Fichier modifié (nano) | 34-nano |
-| 8a | Navigateur (après bash) | Contenu modifié (bash) | 35-bash |
-| 8b | Navigateur (après nano) | Contenu modifié (nano) | 35-nano |
-| 9 | `exit` | Retour au terminal hôte | — |
-| 10 | `docker stop <ID>` | Conteneur arrêté | 36 |
-| 11 | `docker ps` | Nginx absent | 37 |
-| 12 | `docker rm <ID>` | Conteneur supprimé | 38 |
-| 13 | `docker ps -a` | Vide complètement | 39 |
-| 14 | `docker system prune` | Nettoyage complet | 40 |
+| Étape | Commande                         | Résultat                | Screenshot |
+| ----- | -------------------------------- | ----------------------- | ---------- |
+| 1     | `docker run -d -p 8080:80 nginx` | Conteneur lancé         | 28         |
+| 2     | `docker ps`                      | Nginx actif             | 29         |
+| 3     | Navigateur http://localhost:8080 | Page par défaut         | 30         |
+| 4     | `docker exec -ti <ID> bash`      | Bash prompt             | 31         |
+| 5     | `cd /usr/share/nginx/html && ls` | Fichiers visibles       | 32         |
+| 6     | `cat index.html`                 | HTML affiché            | 33         |
+| 7a    | `echo "..." > index.html` (bash) | Fichier modifié (bash)  | 34-bash    |
+| 7b    | `nano index.html` (nano)         | Fichier modifié (nano)  | 34-nano    |
+| 8a    | Navigateur (après bash)          | Contenu modifié (bash)  | 35-bash    |
+| 8b    | Navigateur (après nano)          | Contenu modifié (nano)  | 35-nano    |
+| 9     | `exit`                           | Retour au terminal hôte | —          |
+| 10    | `docker stop <ID>`               | Conteneur arrêté        | 36         |
+| 11    | `docker ps`                      | Nginx absent            | 37         |
+| 12    | `docker rm <ID>`                 | Conteneur supprimé      | 38         |
+| 13    | `docker ps -a`                   | Vide complètement       | 39         |
+| 14    | `docker system prune`            | Nettoyage complet       | 40         |
 
 ---
 
@@ -1423,6 +1473,7 @@ docker system prune
 ### ✅ Job 03 - Synthèse finale
 
 Ce job t'a montré :
+
 1. Comment lancer un serveur web Nginx
 2. Accéder à l'intérieur d'un conteneur actif
 3. Modifier des fichiers en temps réel
@@ -1523,11 +1574,11 @@ cat Dockerfile
 
 **Explication des instructions Dockerfile :**
 
-| Instruction | Explication |
-|-------------|-------------|
-| `FROM php:apache` | Utilise l'image officielle `php:apache` comme base. Cette image contient PHP et Apache préinstallés. |
+| Instruction                     | Explication                                                                                                                                |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `FROM php:apache`               | Utilise l'image officielle `php:apache` comme base. Cette image contient PHP et Apache préinstallés.                                       |
 | `COPY index.php /var/www/html/` | Copie le fichier `index.php` du système hôte vers le répertoire web du conteneur (`/var/www/html/`). Apache servira ce fichier par défaut. |
-| `EXPOSE 80` | Documente que le conteneur écoute sur le port 80 (port standard d'Apache). |
+| `EXPOSE 80`                     | Documente que le conteneur écoute sur le port 80 (port standard d'Apache).                                                                 |
 
 ---
 
@@ -1542,6 +1593,7 @@ ls -la
 ![List source files](./screenshots/47-list-both-files.png)
 
 > **Résultat :** Les fichiers créés apparaissent :
+>
 > ```
 > -rw-r--r--  ... index.php
 > -rw-r--r--  ... Dockerfile
@@ -1552,13 +1604,13 @@ ls -la
 
 ### Résumé Job 04 - Phase 1
 
-| Étape | Commande | Résultat |
-|-------|----------|----------|
-| 1 | `echo "<?php phpinfo(); ?>" > index.php` | Fichier `index.php` créé ✅ |
-| 2 | `cat index.php` | Contenu vérifié ✅ |
-| 3 | `cat > Dockerfile << 'EOF'...` | Fichier `Dockerfile` créé ✅ |
-| 4 | `cat Dockerfile` | Contenu vérifié ✅ |
-| 5 | `ls -la` | 2 fichiers présents ✅ |
+| Étape | Commande                                 | Résultat                     |
+| ----- | ---------------------------------------- | ---------------------------- |
+| 1     | `echo "<?php phpinfo(); ?>" > index.php` | Fichier `index.php` créé ✅  |
+| 2     | `cat index.php`                          | Contenu vérifié ✅           |
+| 3     | `cat > Dockerfile << 'EOF'...`           | Fichier `Dockerfile` créé ✅ |
+| 4     | `cat Dockerfile`                         | Contenu vérifié ✅           |
+| 5     | `ls -la`                                 | 2 fichiers présents ✅       |
 
 ---
 
@@ -1583,11 +1635,13 @@ docker build -t php-apache-app .
 ![Docker build in progress](./screenshots/49-job04-docker-build.png)
 
 > **Explication :**
+>
 > - `docker build` : construit une image Docker basée sur le Dockerfile
 > - `-t php-apache-app` : assigne une étiquette (tag) à l'image (nom : `php-apache-app`, tag : `latest`)
 > - `.` : utilise le Dockerfile dans le répertoire courant
 >
 > **Processus :**
+>
 > 1. Docker télécharge l'image `php:apache` depuis Docker Hub (première exécution seulement)
 > 2. Crée une couche (layer) contenant Apache et PHP
 > 3. Copie le fichier `index.php` dans `/var/www/html/`
@@ -1610,6 +1664,7 @@ docker images
 ![Docker images list](./screenshots/50-job04-docker-images.png)
 
 > **Résultat :** L'image `php-apache-app` apparaît dans la liste avec :
+>
 > - `REPOSITORY` : `php-apache-app`
 > - `TAG` : `latest`
 > - `IMAGE ID` : ID unique de l'image
@@ -1628,6 +1683,7 @@ docker run -d -p 8080:80 php-apache-app
 ![Docker run output](./screenshots/51-job04-docker-run.png)
 
 > **Explication :**
+>
 > - `docker run` : crée et lance un nouveau conteneur basé sur l'image
 > - `-d` : mode détaché (daemon) - exécute le conteneur en arrière-plan
 > - `-p 8080:80` : mappe le port 8080 de la machine au port 80 du conteneur Apache
@@ -1648,6 +1704,7 @@ docker ps
 ![Docker ps - container running](./screenshots/52-job04-docker-ps.png)
 
 > **Résultat :** Le conteneur apparaît avec :
+>
 > - `CONTAINER ID` : ID unique du conteneur
 > - `IMAGE` : `php-apache-app`
 > - `STATUS` : `Up X seconds` (conteneur actif)
@@ -1667,6 +1724,7 @@ http://localhost:8080
 ![phpinfo() page displayed](./screenshots/53-job04-phpinfo-page.png)
 
 > **Résultat attendu :** La page PHP d'information s'affiche avec :
+>
 > - **Titre de page :** `phpinfo()`
 > - **PHP Version** : version installée (ex: PHP 8.2.0)
 > - **Server API** : `Apache 2.0 Handler`
@@ -1721,6 +1779,7 @@ docker rm a1b2c3d4e5f6
 > **Résultat :** L'ID du conteneur s'affiche, confirmant la suppression.
 >
 > **Différence avec `docker stop` :**
+>
 > - `docker stop` : arrête le conteneur (ressources libérées, mais conteneur récupérable)
 > - `docker rm` : supprime le conteneur définitivement (données perdues)
 
@@ -1744,17 +1803,17 @@ docker ps -a
 
 ### Résumé Job 04 - Phase 2 (Build & Run)
 
-| Étape | Commande | Screenshot | Résultat |
-|-------|----------|-----------|----------|
-| 1 | Terminal dans dockerStart/ | 48 | Terminal prêt ✅ |
-| 2 | `docker build -t php-apache-app .` | 49 | Image construite ✅ |
-| 3 | `docker images` | 50 | Image visible ✅ |
-| 4 | `docker run -d -p 8080:80 php-apache-app` | 51 | Conteneur lancé ✅ |
-| 5 | `docker ps` | 52 | Conteneur actif ✅ |
-| 6 | http://localhost:8080 | 53 | phpinfo() affichée ✅ |
-| 7 | `docker stop <ID>` | 54 | Conteneur arrêté ✅ |
-| 8 | `docker rm <ID>` | 55 | Conteneur supprimé ✅ |
-| 9 | `docker ps -a` | 56 | Absence confirmée ✅ |
+| Étape | Commande                                  | Screenshot | Résultat              |
+| ----- | ----------------------------------------- | ---------- | --------------------- |
+| 1     | Terminal dans dockerStart/                | 48         | Terminal prêt ✅      |
+| 2     | `docker build -t php-apache-app .`        | 49         | Image construite ✅   |
+| 3     | `docker images`                           | 50         | Image visible ✅      |
+| 4     | `docker run -d -p 8080:80 php-apache-app` | 51         | Conteneur lancé ✅    |
+| 5     | `docker ps`                               | 52         | Conteneur actif ✅    |
+| 6     | http://localhost:8080                     | 53         | phpinfo() affichée ✅ |
+| 7     | `docker stop <ID>`                        | 54         | Conteneur arrêté ✅   |
+| 8     | `docker rm <ID>`                          | 55         | Conteneur supprimé ✅ |
+| 9     | `docker ps -a`                            | 56         | Absence confirmée ✅  |
 
 ---
 
@@ -1776,6 +1835,7 @@ docker ps -a
 **Objectif réalisé :** ✅ Image Docker personnalisée avec PHP, Apache et phpinfo()
 
 Ce job a démontré comment :
+
 1. **Créer des fichiers source** : `index.php` (code PHP) et `Dockerfile` (configuration)
 2. **Construire une image personnalisée** : `docker build` en utilisant une image de base officielle
 3. **Lancer un conteneur** : `docker run` avec mapping de port
@@ -1787,3 +1847,110 @@ Ce job a démontré comment :
 ---
 
 **Prêt pour Job 05 : Dockerfile Multistage !** 🚀
+
+---
+
+## 📋 Vue d'ensemble des 6 Jobs
+
+### ✅ Jobs Complétés
+
+| Job | Titre | Objectif | Status |
+|-----|-------|----------|--------|
+| **01** | Welcome to Docker | Maîtriser les commandes fondamentales | ✅ Complété |
+| **02** | Mario Game Deployment | Déployer une image publique | ✅ Complété |
+| **02 (alt.)** | Mario Desktop Management | Utiliser Docker Desktop (GUI) | ✅ Complété |
+| **03** | Nginx Web Server | Lancer et configurer un serveur web | ✅ Complété |
+| **04** | Apache + PHP | Créer une image Docker personnalisée | ✅ Complété |
+
+### 🚀 Jobs en Cours / À Faire
+
+| Job | Titre | Objectif | Status | Dossier |
+|-----|-------|----------|--------|---------|
+| **05** | Dockerfile Multistage | Optimiser les images Docker (75-80% réduction) | ✅ Complété | `./Multistage/` |
+| **06** | Dockerfile Python | Créer une image pour une app Python | ⏳ À faire | `./TBD` |
+
+---
+
+## 📚 Structure du Projet
+
+```
+dockerStart/
+├── README.md                      # 📄 Ce fichier (documentation générale)
+├── screenshots/                   # 🎯 Captures d'écran (Jobs 01-04)
+│   ├── 1-Docker-V.png
+│   ├── 2-Docker-Info.png
+│   └── ... (56 images)
+├── Multistage/                    # 🐳 Job 05 - Dockerfile Multistage
+│   ├── README.md                  # Documentation complète avec 13 screenshots
+│   ├── src/
+│   │   └── index.ts               # API TypeScript
+│   ├── Dockerfile                 # Multi-stage (OPTIMISÉ)
+│   ├── Dockerfile-simple          # Classique (pour comparaison)
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── .gitignore
+│   └── screenshots/               # 13 images illustratives
+└── .help/                         # 📚 Ressources pédagogiques (ignorées par Git)
+    ├── Doc/                       # Documentations PDF
+    └── Todo/                      # Énoncés des exercices
+
+```
+
+---
+
+## 🎯 Résumé Pédagogique
+
+### Job 01-02 : Fondamentaux
+- Comprendre l'installation Docker
+- Manipuler les images et conteneurs
+- Gérer les ports et le cycle de vie
+
+### Job 03 : Services Web
+- Lancer un serveur Nginx
+- Accéder à l'intérieur d'un conteneur (`docker exec`)
+- Modifier les fichiers en temps réel
+
+### Job 04 : Images Personnalisées
+- Créer un Dockerfile
+- Utiliser une image de base officielle
+- Construire et tester une image
+
+### Job 05 : Optimisation ⭐
+- Multi-stage build pour réduire la taille
+- Séparer build et production
+- **Gain : 75-80% de réduction d'image**
+
+### Job 06 : Évolution (À faire)
+- Appliquer les concepts à une application Python
+- Mettre en pratique les optimisations
+
+---
+
+## ✅ État de Complétion
+
+```
+Jobs 01-04 .................. ████████████████ 100% ✅
+Documentation .............. ████████████████ 100% ✅
+Screenshots ................. ████████████████ 100% ✅
+
+Job 05 Multistage ........... ████████████████ 100% ✅
+- README.md ................. ████████████████ 100% ✅
+- 13 screenshots ............. ████████████████ 100% ✅
+- Fichiers sources ........... ████████████████ 100% ✅
+
+Job 06 Python ............... ░░░░░░░░░░░░░░░░  0% ⏳
+
+Formation globale ........... ██████████░░░░░░ 83% 📈
+```
+
+---
+
+## 🔗 Liens Rapides
+
+- **Job 05 - Multistage Build** : [Voir le dossier `./Multistage/README.md`](./Multistage/README.md)
+- **Ressources pédagogiques** : [`.help/Doc/`](./.help/Doc/)
+- **Énoncés des exercices** : [`.help/Todo/`](./.help/Todo/)
+
+---
+
+**Formation DWWM - La Plateforme** 🚀
