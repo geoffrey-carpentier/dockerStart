@@ -1433,41 +1433,35 @@ Ce job t'a montré :
 
 ## Job 04 : Apache + PHP Info
 
-**Objectif :** Créer une image Docker personnalisée avec PHP et Apache, contenant un fichier `index.php` qui affiche les informations PHP.
+**Objectif :** Créer une image Docker personnalisée contenant PHP, Apache, et un fichier `index.php` affichant les informations du serveur PHP via `phpinfo()`.
 
 **Prérequis :** Job 01, 02, 03 complétés, Docker opérationnel.
 
-**Concepts clés :** Dockerfile, images personnalisées, COPY, EXPOSE, port mapping.
+**Concepts clés :** Dockerfile, images personnalisées, instructions COPY et EXPOSE, build d'image, port mapping.
 
 ---
 
-### PHASE 1 : Préparation des fichiers
+### PHASE 1 : Préparation des fichiers source
 
 #### 1. Créer le fichier `index.php`
 
-**Ouvrir un terminal dans le dossier du projet (dockerStart) :**
-
-![Terminal in project folder](./screenshots/41-terminal-project-folder.png)
-
----
-
-**Créer le fichier `index.php` :**
+**Commande :**
 
 ```bash
 echo "<?php phpinfo(); ?>" > index.php
 ```
 
-ou manuellement avec un éditeur de texte, ajouter le contenu :
+ou manuellement avec un éditeur de texte :
 
 ```php
-<?php
-phpinfo();
-?>
+<?php phpinfo(); ?>
 ```
 
 ![Create index.php](./screenshots/43-create-index-php.png)
 
 > **Fichier créé :** `index.php` à la racine du projet `dockerStart/`
+>
+> **Explication :** `phpinfo()` est une fonction PHP qui affiche toutes les informations de configuration du serveur PHP (version installée, modules chargés, extensions, variables d'environnement, directive php.ini, etc.).
 
 ---
 
@@ -1479,21 +1473,22 @@ cat index.php
 
 ![Verify index.php](./screenshots/44-verify-index-php.png)
 
-> **Résultat :** Le contenu `<?php phpinfo(); ?>` s'affiche dans le terminal.
->
-> **Explication :** `phpinfo()` est une fonction PHP qui affiche toutes les informations de configuration du serveur PHP (version, modules chargés, variables d'environnement, etc.).
+> **Résultat :** Le fichier s'affiche dans le terminal avec le contenu `<?php phpinfo(); ?>`
 
 ---
 
 #### 2. Créer le fichier `Dockerfile`
 
-**Créer le fichier `Dockerfile` (sans extension) :**
+**Commande :**
 
 ```bash
-echo "FROM php:apache" > Dockerfile
-echo "COPY index.php /var/www/html/" >> Dockerfile
-echo "EXPOSE 80" >> Dockerfile
-echo "CMD [\"apache2-foreground\"]" >> Dockerfile
+cat > Dockerfile << 'EOF'
+FROM php:apache
+
+COPY index.php /var/www/html/
+
+EXPOSE 80
+EOF
 ```
 
 ou manuellement avec un éditeur de texte :
@@ -1508,7 +1503,7 @@ EXPOSE 80
 
 ![Create Dockerfile](./screenshots/45-create-dockerfile.png)
 
-> **Fichier créé :** `Dockerfile` à la racine du projet `dockerStart/`
+> **Fichier créé :** `Dockerfile` (sans extension) à la racine du projet `dockerStart/`
 
 ---
 
@@ -1520,7 +1515,7 @@ cat Dockerfile
 
 ![Verify Dockerfile](./screenshots/46-verify-dockerfile.png)
 
-> **Résultat :** Le contenu du Dockerfile s'affiche avec les 3 instructions.
+> **Résultat :** Les 3 instructions du Dockerfile s'affichent dans le terminal.
 
 ---
 
@@ -1528,13 +1523,13 @@ cat Dockerfile
 
 | Instruction | Explication |
 |-------------|-------------|
-| `FROM php:apache` | Utilise l'image officielle `php:apache` comme base (PHP + Apache préinstallés) |
-| `COPY index.php /var/www/html/` | Copie le fichier `index.php` du répertoire local vers le répertoire web du conteneur |
-| `EXPOSE 80` | Déclare que le conteneur écoute sur le port 80 (Apache par défaut) |
+| `FROM php:apache` | Utilise l'image officielle `php:apache` comme base. Cette image contient PHP et Apache préinstallés. |
+| `COPY index.php /var/www/html/` | Copie le fichier `index.php` du système hôte vers le répertoire web du conteneur (`/var/www/html/`). Apache servira ce fichier par défaut. |
+| `EXPOSE 80` | Documente que le conteneur écoute sur le port 80 (port standard d'Apache). |
 
 ---
 
-#### 3. Lister les fichiers créés
+#### 3. Vérifier les fichiers créés
 
 **Commande :**
 
@@ -1542,47 +1537,40 @@ cat Dockerfile
 ls -la
 ```
 
-![List both files](./screenshots/47-list-both-files.png)
+![List source files](./screenshots/47-list-both-files.png)
 
-> **Résultat attendu :**
+> **Résultat :** Les fichiers créés apparaissent :
 > ```
-> -rw-r--r--  1 user  group   23 May 18 10:30 index.php
-> -rw-r--r--  1 user  group   93 May 18 10:31 Dockerfile
-> -drwxr-xr-x  3 user  group  102 May 18 10:00 screenshots/
+> -rw-r--r--  ... index.php
+> -rw-r--r--  ... Dockerfile
+> -drwxr-xr-x  ... screenshots/
 > ```
->
-> Deux fichiers ont été créés avec succès :
-> - `index.php` : fichier PHP avec `phpinfo()`
-> - `Dockerfile` : configuration de l'image personnalisée
 
 ---
 
 ### Résumé Job 04 - Phase 1
 
-| Étape | Commande / Action | Screenshot | Résultat |
-|-------|------------------|-----------|----------|
-| 1 | Terminal dans dockerStart/ | 41 | Terminal prêt ✅ |
-| 2 | Créer index.php | 43 | Fichier créé ✅ |
-| 3 | Vérifier index.php | 44 | Contenu visible ✅ |
-| 4 | Créer Dockerfile | 45 | Fichier créé ✅ |
-| 5 | Vérifier Dockerfile | 46 | Contenu visible ✅ |
-| 6 | Lister fichiers | 47 | 2 fichiers présents ✅ |
+| Étape | Commande | Résultat |
+|-------|----------|----------|
+| 1 | `echo "<?php phpinfo(); ?>" > index.php` | Fichier `index.php` créé ✅ |
+| 2 | `cat index.php` | Contenu vérifié ✅ |
+| 3 | `cat > Dockerfile << 'EOF'...` | Fichier `Dockerfile` créé ✅ |
+| 4 | `cat Dockerfile` | Contenu vérifié ✅ |
+| 5 | `ls -la` | 2 fichiers présents ✅ |
 
 ---
 
-### Concepts clés apprises (Job 04 - Phase 1)
+### PHASE 2 : Build et exécution
 
-✅ **Image de base officielle** : `php:apache` contient PHP et Apache préinstallés
-✅ **COPY instruction** : Copier des fichiers du système hôte vers le conteneur
-✅ **EXPOSE** : Documenter le port exposé (port 80 pour Apache)
-✅ **Structure Dockerfile** : FROM → COPY → EXPOSE → CMD
-✅ **phpinfo()** : Fonction PHP pour afficher la configuration du serveur
+#### 1. Ouvrir un terminal dans le dossier du projet
+
+![Terminal project folder](./screenshots/48-job04-terminal-opened.png)
+
+> Assurez-vous d'être dans le répertoire `dockerStart/` qui contient les fichiers `index.php` et `Dockerfile`.
 
 ---
 
-### PHASE 2 : Build et Run
-
-#### 1. Build de l'image Docker
+#### 2. Construire l'image Docker
 
 **Commande :**
 
@@ -1590,21 +1578,26 @@ ls -la
 docker build -t php-apache-app .
 ```
 
+![Docker build in progress](./screenshots/49-job04-docker-build.png)
+
 > **Explication :**
 > - `docker build` : construit une image Docker basée sur le Dockerfile
-> - `-t php-apache-app` : assigne une étiquette (tag) à l'image créée (`php-apache-app`)
+> - `-t php-apache-app` : assigne une étiquette (tag) à l'image (nom : `php-apache-app`, tag : `latest`)
 > - `.` : utilise le Dockerfile dans le répertoire courant
 >
-> **Résultat :** Docker exécute les instructions du Dockerfile :
-> 1. Télécharge l'image `php:apache` (s'il n'existe pas)
-> 2. Copie `index.php` dans `/var/www/html/`
-> 3. Expose le port 80
+> **Processus :**
+> 1. Docker télécharge l'image `php:apache` depuis Docker Hub (première exécution seulement)
+> 2. Crée une couche (layer) contenant Apache et PHP
+> 3. Copie le fichier `index.php` dans `/var/www/html/`
+> 4. Configure le port 80 comme exposé
 >
-> **Temps estimé :** 30 secondes à 2 minutes selon la vitesse internet (première fois).
+> **Résultat :** `Successfully tagged docker.io/library/php-apache-app:latest`
+>
+> **Temps estimé :** 10-30 secondes (téléchargement) + extraction des couches.
 
 ---
 
-#### 2. Vérifier que l'image a été créée
+#### 3. Vérifier que l'image a été créée
 
 **Commande :**
 
@@ -1612,19 +1605,17 @@ docker build -t php-apache-app .
 docker images
 ```
 
-> **Résultat attendu :**
-> ```
-> REPOSITORY          TAG       IMAGE ID      CREATED        SIZE
-> php-apache-app      latest    a1b2c3d4e5f6  2 minutes ago  400MB
-> php                 apache    g7h8i9j0k1l2  2 weeks ago    400MB
-> ...
-> ```
->
-> L'image `php-apache-app` doit apparaître dans la liste avec le tag `latest`.
+![Docker images list](./screenshots/50-job04-docker-images.png)
+
+> **Résultat :** L'image `php-apache-app` apparaît dans la liste avec :
+> - `REPOSITORY` : `php-apache-app`
+> - `TAG` : `latest`
+> - `IMAGE ID` : ID unique de l'image
+> - `SIZE` : Taille approximative (~450-500 MB)
 
 ---
 
-#### 3. Lancer le conteneur
+#### 4. Lancer le conteneur
 
 **Commande :**
 
@@ -1632,17 +1623,19 @@ docker images
 docker run -d -p 8080:80 php-apache-app
 ```
 
+![Docker run output](./screenshots/51-job04-docker-run.png)
+
 > **Explication :**
-> - `docker run` : crée et lance un conteneur basé sur l'image
-> - `-d` : mode détaché (daemon) - exécute en arrière-plan
-> - `-p 8080:80` : mappe le port 8080 de la machine au port 80 du conteneur (Apache)
-> - `php-apache-app` : l'image à utiliser
+> - `docker run` : crée et lance un nouveau conteneur basé sur l'image
+> - `-d` : mode détaché (daemon) - exécute le conteneur en arrière-plan
+> - `-p 8080:80` : mappe le port 8080 de la machine au port 80 du conteneur Apache
+> - `php-apache-app` : l'image à utiliser pour créer le conteneur
 >
-> **Résultat :** Un ID de conteneur long s'affiche (ex: `a1b2c3d4e5f6...`). Apache démarre en arrière-plan.
+> **Résultat :** Un ID de conteneur long s'affiche (ex: `a1b2c3d4e5f6...`). Le serveur Apache démarre automatiquement en arrière-plan.
 
 ---
 
-#### 4. Vérifier que le conteneur est actif
+#### 5. Vérifier que le conteneur est actif
 
 **Commande :**
 
@@ -1650,41 +1643,42 @@ docker run -d -p 8080:80 php-apache-app
 docker ps
 ```
 
-> **Résultat attendu :**
-> ```
-> CONTAINER ID   IMAGE          COMMAND             CREATED        STATUS         PORTS                  NAMES
-> a1b2c3d4e5f6   php-apache-app "apache2-foregro..." 10 seconds ago Up 8 seconds   0.0.0.0:8080->80/tcp  agitated_darwin
-> ```
->
-> Le conteneur doit apparaître avec :
+![Docker ps - container running](./screenshots/52-job04-docker-ps.png)
+
+> **Résultat :** Le conteneur apparaît avec :
+> - `CONTAINER ID` : ID unique du conteneur
 > - `IMAGE` : `php-apache-app`
-> - `STATUS` : `Up X seconds`
-> - `PORTS` : `0.0.0.0:8080->80/tcp` (le mapping de port)
+> - `STATUS` : `Up X seconds` (conteneur actif)
+> - `PORTS` : `0.0.0.0:8080->80/tcp` (port mapping en action)
+> - `NAMES` : Nom généré automatiquement
 
 ---
 
-#### 5. Accéder à la page phpinfo dans le navigateur
+#### 6. Accéder à la page phpinfo() dans le navigateur
 
-**Ouvre un navigateur et va à :**
+**Ouvre un navigateur web et accède à :**
 
 ```
 http://localhost:8080
 ```
 
-> **Résultat attendu :** La page `phpinfo()` s'affiche avec :
-> - **PHP Version** : version de PHP (ex: 8.2.0)
-> - **Server API** : Apache 2.0 Handler
-> - **System** : Windows / Linux / macOS
-> - **Build Date** : date de compilation
-> - Tous les **modules PHP chargés** (curl, gd, mysql, etc.)
-> - **Variables d'environnement**
-> - **Configuration PHP** (php.ini directives)
+![phpinfo() page displayed](./screenshots/53-job04-phpinfo-page.png)
+
+> **Résultat attendu :** La page PHP d'information s'affiche avec :
+> - **Titre de page :** `phpinfo()`
+> - **PHP Version** : version installée (ex: PHP 8.2.0)
+> - **Server API** : `Apache 2.0 Handler`
+> - **System** : OS détecté (Linux, Windows, etc.)
+> - **Build Date** : date de compilation PHP
+> - **Modules PHP chargés** : liste des extensions (gd, curl, json, etc.)
+> - **Variables d'environnement** : PATH, HOME, etc.
+> - **Directive php.ini** : paramètres de configuration
 >
-> **Signification :** L'image personnalisée fonctionne correctement avec PHP et Apache opérationnels.
+> **Signification :** L'image personnalisée fonctionne correctement. Apache reçoit les requêtes HTTP sur le port 8080 et exécute le fichier PHP.
 
 ---
 
-#### 6. Arrêter le conteneur
+#### 7. Arrêter le conteneur
 
 **Commande :**
 
@@ -1698,11 +1692,15 @@ docker stop <CONTAINER_ID>
 docker stop a1b2c3d4e5f6
 ```
 
+![Docker stop container](./screenshots/54-job04-docker-stop.png)
+
 > **Résultat :** L'ID du conteneur s'affiche, confirmant l'arrêt gracieux.
+>
+> **Comportement :** Apache arrête de répondre. Le navigateur affichera "Impossible de se connecter" si vous essayez d'accéder à `http://localhost:8080`.
 
 ---
 
-#### 7. Supprimer le conteneur
+#### 8. Supprimer le conteneur
 
 **Commande :**
 
@@ -1716,62 +1714,74 @@ docker rm <CONTAINER_ID>
 docker rm a1b2c3d4e5f6
 ```
 
+![Docker rm container](./screenshots/55-job04-docker-rm.png)
+
 > **Résultat :** L'ID du conteneur s'affiche, confirmant la suppression.
+>
+> **Différence avec `docker stop` :**
+> - `docker stop` : arrête le conteneur (ressources libérées, mais conteneur récupérable)
+> - `docker rm` : supprime le conteneur définitivement (données perdues)
 
 ---
 
-#### 8. (Optionnel) Supprimer l'image
+#### 9. Vérifier la suppression du conteneur
 
 **Commande :**
 
 ```bash
-docker rmi php-apache-app
+docker ps -a
 ```
 
-> **Résultat :** L'image `php-apache-app` est supprimée du système local.
+![Docker ps all - empty](./screenshots/56-job04-docker-ps-empty.png)
+
+> **Résultat :** Le conteneur n'apparaît plus dans la liste (ni actif, ni arrêté).
 >
-> **Note :** Vous pouvez garder l'image pour relancer le conteneur plus tard.
+> **Note :** Si d'autres conteneurs existent, seul le nôtre doit être absent.
 
 ---
 
-### Résumé Job 04 - Phase 2
+### Résumé Job 04 - Phase 2 (Build & Run)
 
-| Étape | Commande | Résultat |
-|-------|----------|----------|
-| 1 | `docker build -t php-apache-app .` | Image créée ✅ |
-| 2 | `docker images` | `php-apache-app` visible ✅ |
-| 3 | `docker run -d -p 8080:80 php-apache-app` | Conteneur lancé ✅ |
-| 4 | `docker ps` | Conteneur actif ✅ |
-| 5 | http://localhost:8080 | phpinfo() affichée ✅ |
-| 6 | `docker stop <ID>` | Conteneur arrêté ✅ |
-| 7 | `docker rm <ID>` | Conteneur supprimé ✅ |
-| 8 | `docker rmi php-apache-app` | Image supprimée (optionnel) ✅ |
+| Étape | Commande | Screenshot | Résultat |
+|-------|----------|-----------|----------|
+| 1 | Terminal dans dockerStart/ | 48 | Terminal prêt ✅ |
+| 2 | `docker build -t php-apache-app .` | 49 | Image construite ✅ |
+| 3 | `docker images` | 50 | Image visible ✅ |
+| 4 | `docker run -d -p 8080:80 php-apache-app` | 51 | Conteneur lancé ✅ |
+| 5 | `docker ps` | 52 | Conteneur actif ✅ |
+| 6 | http://localhost:8080 | 53 | phpinfo() affichée ✅ |
+| 7 | `docker stop <ID>` | 54 | Conteneur arrêté ✅ |
+| 8 | `docker rm <ID>` | 55 | Conteneur supprimé ✅ |
+| 9 | `docker ps -a` | 56 | Absence confirmée ✅ |
 
 ---
 
-### Concepts clés apprises (Job 04 - Complet)
+### Concepts clés apprises (Job 04)
 
 ✅ **Dockerfile personnalisé** : Créer une image basée sur une image officielle
-✅ **Instructions Dockerfile** : FROM, COPY, EXPOSE
-✅ **Build d'image** : `docker build -t` pour créer une image
-✅ **Tag d'image** : `-t nom:tag` pour identifier les images
-✅ **Port mapping** : `-p hostPort:containerPort` pour exposer des services
-✅ **Applicação PHP** : phpinfo() pour afficher la configuration
-✅ **Serveur web Apache** : Déployer avec `php:apache`
-✅ **Cycle complet** : build → run → accéder → stop → rm
+✅ **Instructions Dockerfile** : FROM (image de base) → COPY (fichiers hôte) → EXPOSE (port)
+✅ **Build d'image** : `docker build -t` pour compiler une image à partir d'un Dockerfile
+✅ **Tag d'image** : Nommer et identifier les images avec `-t nom:tag`
+✅ **Port mapping** : `-p hostPort:containerPort` pour exposer des services internes
+✅ **Fonction phpinfo()** : Affiche la configuration complète du serveur PHP
+✅ **Serveur Apache** : Déployer et tester un serveur web dans un conteneur
+✅ **Cycle de vie complet** : build → run → tester → stop → rm
 
 ---
 
 ### ✅ Job 04 - Résumé final
 
-**Phase 1 :** Créer `index.php` et `Dockerfile` ✅
-**Phase 2 :** Build, run, tester et nettoyer ✅
+**Objectif réalisé :** ✅ Image Docker personnalisée avec PHP, Apache et phpinfo()
 
 Ce job a démontré comment :
-1. Créer une image Docker personnalisée
-2. Intégrer des fichiers PHP dans l'image
-3. Utiliser une image de base officielle (`php:apache`)
-4. Exposer un service web sur un port donné
-5. Tester l'application dans le navigateur
+1. **Créer des fichiers source** : `index.php` (code PHP) et `Dockerfile` (configuration)
+2. **Construire une image personnalisée** : `docker build` en utilisant une image de base officielle
+3. **Lancer un conteneur** : `docker run` avec mapping de port
+4. **Tester l'application** : vérifier que PHP s'exécute correctement
+5. **Nettoyer les ressources** : `docker stop` et `docker rm`
+
+**Compétences acquises :** Création d'images Docker, gestion du cycle de vie des conteneurs, intégration d'applications web.
+
+---
 
 **Prêt pour Job 05 : Dockerfile Multistage !** 🚀
