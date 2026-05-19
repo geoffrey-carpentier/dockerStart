@@ -63,7 +63,7 @@ docker images
 docker run -it --rm -p 8088:80 docker/welcome-to-docker
 ```
 
-![docker run welcome](./screenshots/9-docker_run_-it_--rm_-p_xxxx80_.welcome.png)
+![docker run welcome](./screenshots/9-Docker_Run_Welcome.png)
 
 > Lance un conteneur en mode interactif (-it), expose le port 8088 de la machine vers le port 80 du conteneur, et supprime le conteneur automatiquement à l'arrêt (--rm).
 >
@@ -112,7 +112,7 @@ docker images
 docker run --rm hello-world
 ```
 
-![docker run hello-world](./screenshots/Docker_run_--rm_Hello-World.jpg)
+![docker run hello-world](./screenshots/9-Docker_Run_Welcome.png)
 
 > Lance le conteneur hello-world. L'option --rm supprime automatiquement le conteneur après son exécution.
 >
@@ -419,7 +419,7 @@ docker rmi -f docker/welcome-to-docker
 
 ---
 
-## Job 02 : Deploying Mario game on docker container 🍄
+## Job 02 : Déployer le jeu Mario sur un conteneur Docker 🍄
 
 **Objectif :** Déployer l'image du jeu Mario sur un conteneur Docker en utilisant les concepts fondamentaux.
 
@@ -431,7 +431,9 @@ docker rmi -f docker/welcome-to-docker
 docker search mario
 ```
 
-> Cette commande affiche toutes les images Docker disponibles avec "mario" dans le nom. On cherche l'image `jordangrindrod/mario`.
+> *Cette commande affiche toutes les images Docker disponibles dont le nom contient la chaîne de caractères "mario".* 
+
+L'image que nous cherchons est la suivante: `jordangrindrod/mario`.
 
 ![docker search mario](./screenshots/10-Docker_search_mario.png)
 
@@ -468,13 +470,9 @@ docker run -itd -p 4545:8080 jordangrindrod/mario
 > **Résultat :** Le conteneur démarre en arrière-plan et Mario est accessible à `http://localhost:4545`
 ![Mario Game Running](./screenshots/11-infinite_Mario_Start.jpg)
 
-
-
 ### 5. Vérifier que le conteneur est en cours d'exécution
 
-```bash
-docker ps
-```
+`docker ps`
 
 > Affiche le conteneur Mario en cours d'exécution avec sa configuration.
 
@@ -484,11 +482,11 @@ docker ps
 docker inspect <container_id>
 ```
 
-> Affiche tous les détails du conteneur, notamment les ports exposés et les configurations.
+> Affiche tous les détails du conteneur correspondant à l'id renseigné, notamment les ports exposés et les configurations.
 
 ### 7. Accéder au jeu Mario
 
-Ouvrez un navigateur et allez à :
+*Ouvrez un navigateur et allez à :*
 ```
 http://localhost:4545
 ```
@@ -503,7 +501,7 @@ http://localhost:4545
 docker stop <container_id>
 ```
 
-> Arrête gracieusement le conteneur Mario.
+> Arrête "gracieusement" le conteneur Mario (d'après son ID), sans le supprimer.
 
 ### 9. Supprimer le conteneur
 
@@ -660,6 +658,7 @@ docker ps
 Ouvrez votre navigateur web et accédez à :
 
 **Instance 1 :**
+
 ```
 http://localhost:8601
 ```
@@ -670,6 +669,7 @@ http://localhost:8601
 
 ![Mario Gameplay](./screenshots/22-mario-gameplay.jpg)
 **Instance 2 :**
+
 ```
 http://localhost:8600
 ```
@@ -682,13 +682,14 @@ http://localhost:8600
 
 ![Conteneurs 8600 et 8601 actifs](./screenshots/17.5-mario-8600-and-8601-running.jpg)
 
-> Les 2 conteneurs tournent simultanément. Vous pouvez vérifier avec `docker ps`.
+> Les 2 conteneurs tournent simultanément (ports 8600 et 8601). Vous pouvez vérifier avec `docker ps`.
 
 ---
 
 #### **8. Arrêter les conteneurs (Méthode : Par ID)**
 
 **Arrêter le 1er conteneur :**
+
 ```bash
 docker stop <container_id_1>
 ```
@@ -748,9 +749,10 @@ docker rmi pengbai/supermario
 ### PHASE 2 : Manipulation via DOCKER DESKTOP (Méthode GUI)
 
 #### **Avantage de Docker Desktop**
-- Interface graphique intuitive
-- Visualisation en temps réel des conteneurs et images
-- Gestion avec des clics (sans ligne de commande)
+
+- Son interface graphique intuitive
+- La visualisation en temps réel des conteneurs et images
+- La gestion "à la souris" (sans ligne de commande)
 - Idéale pour les débutants
 
 ---
