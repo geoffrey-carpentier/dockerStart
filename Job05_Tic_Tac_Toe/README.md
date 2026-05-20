@@ -19,7 +19,7 @@
 | ---------------- | --------------------------------------------- |
 | **Objectif**     | Application Tic Tac Toe accessible via Docker |
 | **Image Docker** | Nginx + PHP-FPM                               |
-| **Port**         | 8080 (externe) → 80 (conteneur)               |
+| **Port**         | 8080 (externe) → 8080 (conteneur)             |
 | **Volume**       | `game-results` pour persister `results.json`  |
 | **Backend**      | save.php (sauvegarde les résultats du jeu)    |
 | **Frontend**     | index.html (interface du jeu en JavaScript)   |
@@ -167,7 +167,7 @@ docker volume inspect game-results
 #### **Étape 8 : Lancer le conteneur avec le volume**
 
 ```bash
-docker run -d -p 8080:80 -v game-results:/usr/share/nginx/html --name tic-tac-toe-container tic-tac-toe-app
+docker run -d -p 8080:8080 -v game-results:/var/www/html --name tic-tac-toe-container tic-tac-toe-app
 ```
 
 **Explications :**
@@ -250,7 +250,7 @@ Jouer 2-3 parties additionnelles pour générer des résultats.
 #### **Étape 13 : Afficher le contenu de results.json via le terminal**
 
 ```bash
-docker exec tic-tac-toe-container cat /usr/share/nginx/html/results.json
+docker exec tic-tac-toe-container cat /var/www/html/results.json
 ```
 
 **Résultat :** Affiche les résultats de toutes les parties en JSON ✅
@@ -310,8 +310,7 @@ docker stop tic-tac-toe-container
 #### **Étape 16 : Relancer le conteneur**
 
 ```bash
-docker run -d -p 8080:80 -v game-results:/usr/share/nginx/html --name tic-tac-toe-container-2 tic-tac-toe-app
-```
+docker run -d -p 8080:8080 -v game-results:/var/www/html --name tic-tac-toe-container tic-tac-toe-app```
 
 **Résultat :** Nouveau conteneur lancé ✅
 
