@@ -14,6 +14,7 @@
 3. Modifier des fichiers en temps réel
 4. Voir les changements immédiatement dans le navigateur
 5. Arrêter et nettoyer proprement les ressources
+
 ---
 
 ### 1. Lancer le serveur Nginx
@@ -35,7 +36,7 @@ docker run -d -p 8080:80 nginx
 >
 > **Résultat :** Un ID de conteneur long s'affiche (ex: `a1b2c3d4e5f6...`). Le serveur Nginx démarre immédiatement en arrière-plan sur le port 8080.
 >
-> **Important :** Nginx écoute en interne sur le port 80. Grâce au mapping `-p 8080:80`, vous pouvez y accéder via le port 8080 de votre machine.
+> **Important :** Nginx écoute en interne sur le port 80. Grâce au mapping `-p 8080:80`, l'accès se fait via le port 8080 de la machine.
 
 ---
 
@@ -67,7 +68,7 @@ docker ps
 
 ### 3. Accéder à la page d'accueil Nginx via navigateur
 
-**Ouvre un navigateur web et va à :**
+**Accès au service via un navigateur web :**
 
 ```
 http://127.0.0.1:8080
@@ -97,7 +98,7 @@ http://localhost:8080
 
 ### 4. Accéder au bash du conteneur (accès interne)
 
-Pour modifier le contenu serveur, tu dois accéder au **bash (terminal)** du conteneur.
+Pour modifier le contenu serveur, il faut accéder au **bash (terminal)** du conteneur.
 
 **Commande :**
 
@@ -128,7 +129,7 @@ _(Remplace `a1b2c3d4e5f6` par l'ID réel de ton conteneur)_
 > root@a1b2c3d4e5f6:/#
 > ```
 >
-> Tu es maintenant **connecté à l'intérieur du conteneur**, comme si tu utilisais SSH sur une machine Linux distante. Chaque commande que tu tapes s'exécute **dans le conteneur**, pas sur ta machine.
+> Le shell du conteneur est désormais accessible, comme si une connexion SSH avait été ouverte sur une machine Linux distante. Chaque commande s'exécute **dans le conteneur**, et non sur la machine hôte.
 
 ---
 
@@ -196,7 +197,7 @@ _(À exécuter dans le bash du conteneur)_
 > </html>
 > ```
 >
-> **Comprendre :** C'est ce contenu HTML qui s'affiche quand tu ouvres http://localhost:8080 dans le navigateur.
+> **Comprendre :** C'est ce contenu HTML qui s'affiche lors de l'ouverture de http://localhost:8080 dans le navigateur.
 
 ---
 
@@ -248,7 +249,7 @@ _(À exécuter dans le bash du conteneur)_
 > **Éditeur nano :**
 >
 > - Affiche le contenu du fichier
-> - Tu peux éditer ligne par ligne
+> - Le fichier peut être édité ligne par ligne
 > - Les commandes sont affichées en bas :
 >   - `^X` = Ctrl+X : quitter
 >   - `^O` = Ctrl+O : sauvegarder
@@ -268,7 +269,7 @@ _(À exécuter dans le bash du conteneur)_
 
 ### 8. Vérifier la modification dans le navigateur
 
-**Ouvre ton navigateur et rafraîchis la page :**
+**Rafraîchir la page dans le navigateur :**
 
 ```
 http://localhost:8080
@@ -379,7 +380,7 @@ docker rm a1b2c3d4e5f6
 > - `docker stop` : arrête le conteneur (peut le relancer)
 > - `docker rm` : supprime le conteneur, définitivement
 >
-> **Note :** Il faut arrêter le conteneur **avant** de le supprimer. Si on essaie de supprimer un conteneur actif :
+> **Note :** Le conteneur doit être arrêté **avant** d'être supprimé. Si la suppression est tentée sur un conteneur actif :
 >
 > ```bash
 > docker rm a1b2c3d4e5f6

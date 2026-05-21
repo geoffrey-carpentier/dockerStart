@@ -6,11 +6,11 @@ Formation DWWM - La Plateforme
 
 ---
 
-## 📌 Objectif
+## 📌 Objectif général
 
-Apprendre à créer des images Docker **ultra-légères** grâce au **multi-stage build**. Cette technique est utilisée en production pour réduire la taille des images de **75-80%** !
+L'objectif est de créer des images Docker **ultra-légères** grâce au **multi-stage build**. Cette technique est utilisée en production pour réduire la taille des images de **75-80%** !
 
-### ⚠️ Le Problème
+### Problème
 
 Une image Node.js classique avec les `devDependencies` peut faire **400-600 MB**. En production, on n'a pas besoin de tout ça :
 
@@ -19,16 +19,16 @@ Une image Node.js classique avec les `devDependencies` peut faire **400-600 MB**
 - Outils de build (tsc, ts-node, etc.)
 - Fichiers temporaires
 
-### ✨ La Solution : Multi-stage Build
+### Solution : Multi-stage build
 
-On utilise **plusieurs FROM** pour séparer les étapes :
+Le principe consiste à utiliser **plusieurs FROM** pour séparer les étapes :
 
 1. **Étape 1 : Builder** (image temporaire) - contient tout pour compiler
 2. **Étape 2 : Production** (image finale) - contient UNIQUEMENT le nécessaire
 
 ---
 
-## 🎯 Ce que tu vas apprendre
+## 🎯 Objectifs pédagogiques
 
 ✅ Comprendre le problème des images trop lourdes  
 ✅ Utiliser plusieurs FROM dans un Dockerfile  

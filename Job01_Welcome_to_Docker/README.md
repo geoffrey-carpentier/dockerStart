@@ -6,7 +6,7 @@
 ¤ [Lien du fichier d'installation](https://docs.docker.com/desktop/install/windows-install/)
 ¤ [Lien de la documentation](https://docs.docker.com/reference/)
 
-Puis dans Visual-studio ou dans terminal (cmd, powershell...) on va taper les commandes de base pour vérifier que Docker est bien installé et opérationnel.
+Puis, dans Visual Studio Code ou dans un terminal (cmd, PowerShell...), taper les commandes de base pour vérifier que Docker est bien installé et opérationnel.
 
 ### 1. Vérification de l'installation
 
@@ -33,7 +33,7 @@ docker info
 
 ---
 
-## Test des commandes de base
+## Commandes de base
 
 ### 3. Vérifier les conteneurs en cours d'exécution
 
@@ -61,7 +61,9 @@ docker images
 docker run -it --rm -p 8088:80 docker/welcome-to-docker
 ```
 
-![docker run welcome](./screenshots/9-Docker_Run_Welcome.png)
+![docker run welcome](./screenshots/5-Docker-Run.png)
+
+![docker run welcome browser](./screenshots/5-Docker-Run_Browser.png)
 
 > Lance un conteneur en mode interactif (-it), expose le port 8088 de la machine vers le port 80 du conteneur, et supprime le conteneur automatiquement à l'arrêt (--rm).
 >
@@ -111,13 +113,13 @@ docker images
 docker run --rm hello-world
 ```
 
-![docker run hello-world](./screenshots/9-Docker_Run_Welcome.png)
+![docker run hello-world](./screenshots/Docker_Run_--Rm_Hello-World.png)
 
-> Lance le conteneur hello-world. L'option --rm supprime automatiquement le conteneur après son exécution.
+> Lance le conteneur `hello-world`. L'option `--rm` supprime automatiquement le conteneur après son exécution.
 >
 > **Résultat :** Affiche un message de bienvenue et s'arrête.
 
-### 10. Actions de suppression - Guide complet
+### 10. Gestion des suppressions
 
 #### **A. Supprimer des CONTENEURS**
 
@@ -408,15 +410,15 @@ docker rmi -f docker/welcome-to-docker
 
 ## ✅ Job 01 - Résumé
 
-| Étape              | Commande                                            | Résultat             |
-| ------------------ | --------------------------------------------------- | -------------------- |
-| Vérif installation | `docker --version`                                  | v29.2.1 ✅           |
-| Infos système      | `docker info`                                       | Détails Docker ✅    |
-| Conteneurs actifs  | `docker ps`                                         | Aucun au départ ✅   |
-| Images présentes   | `docker images`                                     | Aucune au départ ✅  |
-| Lancer Welcome     | `docker run -d -p 8088:80 docker/welcome-to-docker` | Conteneur démarré ✅ |
-| Arrêter conteneur  | `docker stop <id>`                                  | Conteneur stoppé ✅  |
-| Télécharger image  | `docker pull hello-world`                           | Image récupérée ✅   |
-| Lancer Hello-World | `docker run --rm hello-world`                       | Message affiché ✅   |
+| Étape              | Commande                                                  | Résultat             |
+| ------------------ | --------------------------------------------------------- | -------------------- |
+| Vérif installation | `docker --version`                                        | v29.2.1 ✅           |
+| Infos système      | `docker info`                                             | Détails Docker ✅    |
+| Conteneurs actifs  | `docker ps`                                               | Aucun au départ ✅   |
+| Images présentes   | `docker images`                                           | Aucune au départ ✅  |
+| Lancer Welcome     | `docker run -it --rm -p 8088:80 docker/welcome-to-docker` | Conteneur démarré ✅ |
+| Arrêter conteneur  | `docker stop <id>`                                        | Conteneur stoppé ✅  |
+| Télécharger image  | `docker pull hello-world`                                 | Image récupérée ✅   |
+| Lancer Hello-World | `docker run --rm hello-world`                             | Message affiché ✅   |
 
 ---

@@ -47,12 +47,14 @@ docker run -itd -p 4545:8080 jordangrindrod/mario
 - `-d` : mode détaché (detach mode) - exécute le conteneur en arrière-plan
 - `-p 4545:8080` : mappe le port 4545 de l'hôte au port 8080 du conteneur
 
-> **Résultat :** Le conteneur démarre en arrière-plan et Mario est accessible à `http://localhost:4545`
+> **Résultat :** Le conteneur démarre en arrière-plan et Mario est accessible à `http://localhost:4545`.
 > ![Mario Game Running](./screenshots/11-Infinite_Mario_Start.jpg)
 
 ### 5. Vérifier que le conteneur est en cours d'exécution
 
-`docker ps`
+```bash
+docker ps
+```
 
 > Affiche le conteneur Mario en cours d'exécution avec sa configuration.
 
@@ -66,13 +68,13 @@ docker inspect <container_id>
 
 ### 7. Accéder au jeu Mario
 
-_Ouvrez un navigateur et allez à :_
+_Ouvrir un navigateur et aller à :_
 
 ```
 http://localhost:4545
 ```
 
-![Mario Game Running](./screenshots/11-infinite_Mario_Start.jpg)
+![Mario Game Running](./screenshots/11-Infinite_Mario_Start.jpg)
 
 > Le jeu Mario est maintenant accessible et jouable dans le navigateur !
 
@@ -94,7 +96,7 @@ docker rm <container_id>
 
 ---
 
-## ✅ Job 03 - Résumé
+## ✅ Résumé du job 03
 
 | Étape            | Commande                                            | Résultat              |
 | ---------------- | --------------------------------------------------- | --------------------- |
@@ -116,7 +118,7 @@ docker rm <container_id>
 
 ---
 
-## Job 03 (alt.) : Super Mario Émulation via Docker Desktop 👾
+## Version alternative : Super Mario via Docker Desktop 👾
 
 **Objectif :** Approfondir la manipulation des conteneurs Docker en utilisant **2 méthodes** : le terminal (CLI) et l'interface Docker Desktop (GUI). Cet exercice montre que Docker offre plusieurs interfaces pour gérer les conteneurs.
 
@@ -261,13 +263,13 @@ http://localhost:8600
 
 ![Super Mario à localhost:8600](./screenshots/21-Mario-8600-Game.jpg)
 
-> Les 2 instances fonctionnent indépendamment. Vous pouvez jouer sur les deux en parallèle.
+> Les deux instances fonctionnent indépendamment et peuvent être utilisées en parallèle.
 
 **Vue des conteneurs actifs :**
 
 ![Conteneurs 8600 et 8601 actifs](./screenshots/17.5-Mario-8600-And-8601-Running.jpg)
 
-> Les 2 conteneurs tournent simultanément (ports 8600 et 8601). Vous pouvez vérifier avec `docker ps`.
+> Les deux conteneurs tournent simultanément (ports 8600 et 8601). La vérification se fait avec `docker ps`.
 
 ---
 
@@ -344,7 +346,7 @@ docker rmi pengbai/supermario
 
 ---
 
-#### **1. Ouvrir Docker Desktop**
+#### **1. Ouverture de Docker Desktop**
 
 > Docker Desktop doit être en cours d'exécution. Chercher l'icône Docker dans la barre système (Windows : en bas à droite) ou lancer l'application.
 
@@ -396,7 +398,7 @@ docker rmi pengbai/supermario
 
 **Depuis l'onglet Images :**
 
-1. Selectionnez `pengbai/supermario`
+1. Sélectionner `pengbai/supermario`
 2. Cliquez sur le bouton **"RUN"** (triangle bleu ▶️)
 3. Une fenêtre apparaît :
    - **Container name** : Donnez un nom (optionnel, ex: `mario-8600`)
@@ -500,7 +502,7 @@ L'onglet **Dashboard** montre les événements en temps réel (démarrages, arr�
 | **Télécharger**         | `docker pull pengbai/supermario`   | Automatique lors du "RUN"            |
 | **Lancer conteneur**    | `docker run -itd -p 8600:8080 ...` | Onglet "Images" → "RUN" + formulaire |
 | **Vérifier état**       | `docker ps`                        | Onglet "Containers" (temps réel)     |
-| **Accéder au jeu**      | Ouvrir http://localhost:8600       | Clic sur port ou "Open in browser"   |
+| **Accéder au jeu**      | http://localhost:8600              | Clic sur port ou "Open in browser"   |
 | **Arrêter**             | `docker stop <id>`                 | Clic "STOP"                          |
 | **Supprimer conteneur** | `docker rm <id>`                   | Clic "DELETE"                        |
 | **Supprimer image**     | `docker rmi pengbai/supermario`    | Onglet "Images" → "DELETE"           |

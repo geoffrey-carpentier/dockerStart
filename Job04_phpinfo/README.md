@@ -8,7 +8,7 @@
 
 ---
 
-### PHASE 1 : Préparation des fichiers source
+### Préparation des fichiers source
 
 #### 1. Créer le fichier `index.php`
 
@@ -116,7 +116,7 @@ ls -la
 
 ---
 
-### Résumé Job 04 - Phase 1
+### Résumé du job 04 - phase 1
 
 | Étape | Commande                                 | Résultat                     |
 | ----- | ---------------------------------------- | ---------------------------- |
@@ -128,13 +128,13 @@ ls -la
 
 ---
 
-### PHASE 2 : Build et exécution
+### Build et exécution
 
 #### 1. Ouvrir un terminal dans le dossier du projet
 
 ![Terminal project folder](./screenshots/48-job04-terminal-opened.png)
 
-> Assurez-vous d'être dans le répertoire `dockerStart/` qui contient les fichiers `index.php` et `Dockerfile`.
+> Le terminal doit se trouver dans le répertoire `dockerStart/`, qui contient les fichiers `index.php` et `Dockerfile`.
 
 ---
 
@@ -229,7 +229,7 @@ docker ps
 
 #### 6. Accéder à la page phpinfo() dans le navigateur
 
-**Ouvre un navigateur web et accède à :**
+**Accès à la page `phpinfo()` dans le navigateur :**
 
 ```
 http://localhost:8080
@@ -270,7 +270,7 @@ docker stop a1b2c3d4e5f6
 
 > **Résultat :** L'ID du conteneur s'affiche, confirmant l'arrêt gracieux.
 >
-> **Comportement :** Apache arrête de répondre. Le navigateur affichera "Impossible de se connecter" si vous essayez d'accéder à `http://localhost:8080`.
+> **Comportement :** Apache arrête de répondre. Le navigateur affichera "Impossible de se connecter" lors d'une tentative d'accès à `http://localhost:8080`.
 
 ---
 
