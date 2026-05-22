@@ -53,7 +53,7 @@ ls -la
 - `results.json` pour la persistance
 - `Dockerfile` pour la construction de l'image
 
-![Vérification de la structure du projet](./screenshots/57-job05-project-structure.png)
+![Vérification de la structure du projet](./screenshots/01-job05-project-structure.png)
 
 ## Étape 2 - Vérifier le Dockerfile
 
@@ -68,7 +68,7 @@ cat Dockerfile
 - ajustement des droits sur `results.json`
 - exposition du port `8080`
 
-![Contenu du Dockerfile](./screenshots/58-job05-dockerfile-content.png)
+![Contenu du Dockerfile](./screenshots/02-job05-dockerfile-content.png)
 
 ## Étape 3 - Construire l'image Docker
 
@@ -78,7 +78,11 @@ docker build -t tic-tac-toe-app .
 
 **Résultat :** l'image `tic-tac-toe-app` est créée avec succès.
 
-![Construction de l'image](./screenshots/59-job05-docker-build.png)
+![Construction de l'image](./screenshots/03-job05-docker-build.png)
+
+On peut accèder aux détails de l'image créée dans docker desktop :
+
+![Détails image desktop](./screenshots/03-job05-docker-build-desktop.png)
 
 ## Étape 4 - Vérifier l'image créée
 
@@ -88,7 +92,7 @@ docker images
 
 **Résultat :** l'image `tic-tac-toe-app` apparaît dans la liste.
 
-![Vérification de l'image](./screenshots/60-job05-docker-images.png)
+![Vérification de l'image](./screenshots/04-job05-docker-images.png)
 
 ## Étape 5 - Créer le volume Docker
 
@@ -98,7 +102,7 @@ docker volume create game-results
 
 **Résultat :** le volume nommé `game-results` est créé.
 
-![Création du volume](./screenshots/61-job05-docker-volume-create.png)
+![Création du volume](./screenshots/05-job05-docker-volume-create.png)
 
 ## Étape 6 - Vérifier et inspecter le volume
 
@@ -109,9 +113,9 @@ docker volume inspect game-results
 
 **Résultat :** le volume est bien présent et son emplacement est accessible.
 
-![Vérification du volume](./screenshots/62-job05-docker-volume-ls.png)
+![Vérification du volume](./screenshots/06-job05-docker-volume-ls.png)
 
-![Inspection du volume](./screenshots/63-job05-docker-volume-inspect.png)
+![Inspection du volume](./screenshots/07-job05-docker-volume-inspect.png)
 
 ## Étape 7 - Lancer le conteneur
 
@@ -128,7 +132,9 @@ docker run -d -p 8080:8080 -v game-results:/var/www/html --name tic-tac-toe-cont
 
 **Accès :** `http://localhost:8080`
 
-![Lancement du conteneur et contenu du volume](./screenshots/64-job05-docker-run.png)
+![Lancement du conteneur et contenu du volume](./screenshots/08-job05-docker-run.png)
+
+![Page du jeu Tic-Tac-Toe dans le navigateur](./screenshots/09-job05-browser-game.png)
 
 ## Étape 8 - Vérifier le fonctionnement
 
@@ -139,7 +145,7 @@ docker logs tic-tac-toe-container
 
 **Résultat :** le conteneur tourne correctement et PHP-FPM / Nginx démarrent sans erreur.
 
-![Vérification finale de la build et du run](./screenshots/67_docker_build_run-final.png)
+![Vérification finale de la build et du run](./screenshots/18-job05-docker-build-run-final.png)
 
 ## Étape 9 - Vérifier la persistance des résultats
 
@@ -150,6 +156,10 @@ docker exec tic-tac-toe-container cat /var/www/html/results.json
 **Résultat :** le fichier `results.json` contient les parties enregistrées.
 
 > Le volume `game-results` conserve les fichiers, même si le conteneur est supprimé.
+
+![Résultats enregistrés dans results.json](./screenshots/11-job05-results-json-filled.png)
+
+![Résultat de partie affiché dans l'interface](./screenshots/10-job05-game-result.png)
 
 ## Étape 10 - Arrêter, supprimer et vérifier le nettoyage
 
@@ -162,7 +172,7 @@ docker ps -a
 
 **Résultat :** le conteneur et l'image sont supprimés, mais le volume reste disponible.
 
-![Nettoyage et conteneurs supprimés](./screenshots/66-job05-docker-ps-empty.png)
+![Nettoyage et conteneurs supprimés](./screenshots/16-job05-docker-ps-empty.png)
 
 ## Vérification finale du volume
 
@@ -173,6 +183,8 @@ Le volume `game-results` contient bien les fichiers attendus :
 - `results.json`
 
 Cette vue confirme que la persistance fonctionne correctement dans Docker Desktop.
+
+![Persistance confirmée après relance du conteneur](./screenshots/14-job05-results-json-persisted.png)
 
 ## Résumé final
 
