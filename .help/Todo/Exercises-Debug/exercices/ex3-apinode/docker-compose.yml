@@ -1,0 +1,14 @@
+# Exercice 3 - ApiNode
+# Lance ce projet avec : docker compose up
+# Docker Compose renvoie une erreur de parsing du fichier YAML.
+
+services:
+  api:
+    image: node:20-alpine
+    container_name: api_node
+    working_dir: /app
+   ports:
+      - "3000:3000"
+    command: node server.js
+    volumes:
+      - ./app:/app

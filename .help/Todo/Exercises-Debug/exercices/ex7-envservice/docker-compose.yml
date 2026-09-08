@@ -1,0 +1,12 @@
+# Exercice 7 - EnvService
+# Lance ce projet avec : docker compose up
+# Docker Compose renvoie une erreur de format sur la liste environment.
+
+services:
+  app:
+    image: node:20-alpine
+    container_name: env_service
+    command: node -e "console.log(process.env.APP_MODE)"
+    environment:
+      - APP_MODE: production
+      - APP_PORT: 4000

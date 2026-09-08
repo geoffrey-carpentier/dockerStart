@@ -1,0 +1,19 @@
+# Exercice 2 - BlogApp
+# Lance ce projet avec : docker compose up
+# Docker Compose refuse de demarrer et renvoie une erreur de dependance.
+
+services:
+  app:
+    image: php:8.2-apache
+    container_name: blog_app
+    ports:
+      - "8082:80"
+    depends_on:
+      - database
+
+  db:
+    image: mysql:8
+    container_name: blog_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: blog

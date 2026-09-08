@@ -1,0 +1,9 @@
+{
+  "chat.editing.explainChanges.enabled": true,
+  "chat.tools.terminal.autoApprove": {
+    "/^pwsh -NoProfile -Command '\\$p1 = Join-Path \\$env:TEMP \"presentation_docker_compose\\.txt\"; pdftotext \"D:\\\\TOOLS\\\\LARAGON\\\\www\\\\dockerStart\\\\\\.help\\\\Doc\\\\Presentation_Docker_Compose\\.pdf\" - \\| Set-Content -Encoding utf8 \\$p1; \\$p2 = Join-Path \\$env:TEMP \"support_docker_compose\\.txt\"; pdftotext \"D:\\\\TOOLS\\\\LARAGON\\\\www\\\\dockerStart\\\\\\.help\\\\Doc\\\\Support_Docker_Compose\\.pdf\" - \\| Set-Content -Encoding utf8 \\$p2; Write-Host \"Extracted to: \\$p1 and \\$p2\"'$/": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  }
+}

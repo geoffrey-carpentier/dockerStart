@@ -1,0 +1,25 @@
+# Exercice 8 - FullStack
+# Lance ce projet avec : docker compose up
+# Plusieurs problemes empechent la stack de fonctionner correctement.
+# La page reste injoignable sur http://localhost:8088
+# et un service ne trouve pas son reseau.
+
+services:
+  web:
+    image: nginx:alpine
+    container_name: full_web
+    ports:
+      - "8088:8080"
+    networks:
+      - appnet
+
+  api:
+    image: node:20-alpine
+    container_name: full_api
+    command: node -e "setInterval(()=>{},1000)"
+    networks:
+      - apinet
+
+networks:
+  appnet:
+    driver: bridge

@@ -1,0 +1,13 @@
+# Exercice 4 - DataMySQL
+# Lance ce projet avec : docker compose up
+# Docker Compose refuse de lire le fichier : il manque un caractere de syntaxe.
+
+services:
+  database:
+    image: mysql:8
+    container_name: data_mysql
+    environment
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: catalogue
+    ports:
+      - "3307:3306"

@@ -1,0 +1,19 @@
+# Exercice 5 - MultiStack
+# Lance ce projet avec : docker compose up
+# Docker Compose renvoie une erreur : un reseau est introuvable.
+
+services:
+  frontend:
+    image: nginx:alpine
+    container_name: multi_front
+    ports:
+      - "8085:80"
+    networks:
+      - backnet
+
+  backend:
+    image: node:20-alpine
+    container_name: multi_back
+    command: node -e "setInterval(()=>{},1000)"
+    networks:
+      - backnet
