@@ -1,0 +1,8 @@
+.env
+.cache/
+.nyc_output/
+.idea/
+.vscode/
+node_modules/
+*.log
+*.tmp

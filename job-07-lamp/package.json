@@ -1,0 +1,17 @@
+{
+  "name": "job-07-lamp",
+  "version": "1.0.0",
+  "description": "Créer une stack LAMP avec PHP 8.2, MySQL 8 et phpMyAdmin, en évitant le conflit de port avec Laragon en **ne publiant pas MySQL sur le port hôte 3306**.",
+  "main": "capture.js",
+  "scripts": {
+    "capture": "node capture.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "playwright": "^1.60.0"
+  }
+}
